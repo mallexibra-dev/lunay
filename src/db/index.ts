@@ -1,7 +1,6 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import { env } from '@/env';
-import * as schema from './schema';
 
 // Singleton pattern for database connection
 let client: postgres.Sql | null = null;
@@ -20,15 +19,13 @@ function getDatabaseClient() {
 export function getDb() {
   if (!db) {
     const client = getDatabaseClient();
-    db = drizzle(client, { schema });
+    db = drizzle(client, { schema: {} }); // Empty schema for starter kit
   }
   return db;
 }
 
 // For migrations
 export const migrationClient = postgres(env.DATABASE_URL!, { max: 1 });
-export const migrationDb = drizzle(migrationClient, { schema });
+export const migrationDb = drizzle(migrationClient, { schema: {} });
 
-// Export schema for convenience
-export * from './schema';
 export { getDb as db };

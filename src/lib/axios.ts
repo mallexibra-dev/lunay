@@ -1,6 +1,5 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosResponse, AxiosError } from 'axios'
-import Cookies from 'js-cookie'
 
 // =============================================================================
 // Axios Instance Configuration
@@ -91,9 +90,10 @@ class ApiClient {
   }
 
   private getAuthToken(): string | null {
-    // Check for token in cookies (client-side)
+    // For starter kit - implement token retrieval as needed
+    // Example: check localStorage, sessionStorage, or cookies
     if (typeof window !== 'undefined') {
-      return Cookies.get('better-auth.session_token') || null
+      return localStorage.getItem('auth_token') || null
     }
     return null
   }
@@ -108,9 +108,9 @@ class ApiClient {
         case 401:
           // Unauthorized - clear tokens
           if (typeof window !== 'undefined') {
-            Cookies.remove('better-auth.session_token')
+            localStorage.removeItem('auth_token')
             // Redirect to login if needed
-            window.location.href = '/login'
+            console.log('Unauthorized - please login')
           }
           break
         case 403:
@@ -221,17 +221,9 @@ export default apiClient
 /**
  * Set authentication token for future requests
  */
-export const setAuthToken = (
-  token: string,
-  options?: Cookies.CookieAttributes
-): void => {
+export const setAuthToken = (token: string): void => {
   if (typeof window !== 'undefined') {
-    Cookies.set('better-auth.session_token', token, {
-      expires: 7, // 7 days
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      ...options,
-    })
+    localStorage.setItem('auth_token', token)
   }
 }
 
@@ -240,7 +232,7 @@ export const setAuthToken = (
  */
 export const clearAuthToken = (): void => {
   if (typeof window !== 'undefined') {
-    Cookies.remove('better-auth.session_token')
+    localStorage.removeItem('auth_token')
   }
 }
 
@@ -249,7 +241,7 @@ export const clearAuthToken = (): void => {
  */
 export const getAuthToken = (): string | null => {
   if (typeof window !== 'undefined') {
-    return Cookies.get('better-auth.session_token') || null
+    return localStorage.getItem('auth_token')
   }
   return null
 }

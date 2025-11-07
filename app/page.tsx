@@ -27,11 +27,11 @@ export default function HomePage() {
         </div>
 
         <div className="space-y-4 text-sm text-gray-600">
-          <p>🔐 Authentication with Better Auth</p>
           <p>🗄️ Database with Drizzle ORM</p>
           <p>🔄 State Management with TanStack Query</p>
           <p>🧪 Testing with Vitest & React Testing Library</p>
           <p>📊 Logging with Winston</p>
+          <p>🛡️ Security headers and rate limiting</p>
         </div>
       </div>
     </main>

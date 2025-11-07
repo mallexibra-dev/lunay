@@ -1,30 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { auth } from '@/lib/auth';
-import { logger, logSecurityEvent, logPerformance, logApiRequest } from '@/lib/logger';
-
-interface User {
-  id: string;
-  email: string;
-  name: string;
-  image?: string | null;
-  emailVerified: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  role?: 'user' | 'admin';
-}
-
-interface AuthSession {
-  user: User;
-  session: {
-    id: string;
-    userId: string;
-    expiresAt: Date;
-    token: string;
-    createdAt: Date;
-    updatedAt: Date;
-  };
-}
+import { logger, logPerformance, logApiRequest } from '@/lib/logger';
 
 // Helper function to safely parse request body
 async function safeParseBody(req: Request): Promise<unknown> {
@@ -72,13 +48,13 @@ export async function proxy(request: NextRequest) {
   if (pathname.startsWith('/api/')) {
     const rateLimitResult = await checkRateLimit(ip, pathname);
     if (!rateLimitResult.allowed) {
-      logSecurityEvent('rate_limit_exceeded', {
+      logger.warn('Rate limit exceeded', {
         ip,
         pathname,
         count: rateLimitResult.count,
-      }, ip);
+      });
 
-      // Log API request (will be logged at request level in API wrapper)
+      // Log API request
       logApiRequest(
         {
           method: request.method,
@@ -103,18 +79,6 @@ export async function proxy(request: NextRequest) {
     response.headers.set('X-RateLimit-Limit', '100');
     response.headers.set('X-RateLimit-Remaining', String(100 - rateLimitResult.count));
     response.headers.set('X-RateLimit-Reset', String(rateLimitResult.resetTime));
-  }
-
-  // Authentication proxy
-  const authResult = await handleAuthentication(request, pathname);
-  if (authResult.redirect) {
-    return authResult.redirect;
-  }
-
-  // Set auth headers for downstream use
-  if (authResult.session) {
-    response.headers.set('X-User-ID', String(authResult.session.user.id));
-    response.headers.set('X-User-Role', authResult.session.user.role || 'user');
   }
 
   // Log API requests that pass through proxy
@@ -191,93 +155,6 @@ async function checkRateLimit(
   // Increment count
   record.count++;
   return { allowed: true, count: record.count, resetTime: record.resetTime };
-}
-
-// Authentication handler
-async function handleAuthentication(
-  request: NextRequest,
-  pathname: string
-): Promise<{ session?: AuthSession | null; redirect?: NextResponse }> {
-  // Public paths that don't require authentication
-  const publicPaths = [
-    '/',
-    '/auth/signin',
-    '/auth/signup',
-    '/auth/forgot-password',
-    '/api/auth',
-    '/api/health',
-    '/_next',
-    '/favicon.ico',
-  ];
-
-  const isPublicPath = publicPaths.some(path =>
-    pathname === path || pathname.startsWith(path)
-  );
-
-  if (isPublicPath) {
-    return {};
-  }
-
-  try {
-    // Check if user is authenticated
-    const session = await auth.api.getSession({
-      headers: request.headers,
-    });
-
-    if (!session) {
-      // Redirect to sign-in for protected routes
-      if (pathname.startsWith('/dashboard') || pathname.startsWith('/profile')) {
-        const signInUrl = new URL('/auth/signin', request.url);
-        signInUrl.searchParams.set('redirect', pathname);
-        return {
-          redirect: NextResponse.redirect(signInUrl),
-        };
-      }
-
-      // For API routes, return unauthorized
-      if (pathname.startsWith('/api/')) {
-        return {
-          redirect: NextResponse.json(
-            {
-              success: false,
-              message: 'Authentication required',
-            },
-            { status: 401 }
-          ),
-        };
-      }
-    }
-
-    // Role-based access control
-    const userRole = (session?.user as any)?.role;
-    if (pathname.startsWith('/admin') && userRole !== 'admin') {
-      logSecurityEvent('unauthorized_admin_access', {
-        pathname,
-        userId: session?.user?.id,
-        userRole,
-      });
-
-      return {
-        redirect: NextResponse.redirect(new URL('/unauthorized', request.url)),
-      };
-    }
-
-    return { session };
-  } catch (error) {
-    logger.error('Authentication error in proxy', {
-      pathname,
-      error: error instanceof Error ? error.message : 'Unknown error',
-    });
-
-    // Redirect to sign-in on auth errors
-    if (pathname.startsWith('/dashboard') || pathname.startsWith('/profile')) {
-      return {
-        redirect: NextResponse.redirect(new URL('/auth/signin', request.url)),
-      };
-    }
-
-    return {};
-  }
 }
 
 // Configure proxy matcher
