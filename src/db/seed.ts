@@ -1,3 +1,4 @@
+import { pathToFileURL } from 'node:url';
 import { getDb } from './index';
 
 const db = getDb();
@@ -18,7 +19,9 @@ async function seed() {
 }
 
 // Run the seed function if this file is executed directly
-if (require.main === module) {
+const isDirectRun =
+  import.meta.url === pathToFileURL(process.argv[1] ?? '').href;
+if (isDirectRun) {
   seed();
 }
 
