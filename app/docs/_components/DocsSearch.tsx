@@ -41,12 +41,12 @@ export const DocsSearch = ({ sections }: { sections: DocsNavSection[] }) => {
       <button
         type='button'
         onClick={() => setOpen(true)}
-        className='inline-flex h-9 min-w-0 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-xs font-medium text-slate-500 transition hover:bg-white hover:text-slate-900 hover:shadow-sm'
+        className='inline-flex h-9 min-w-0 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-xs font-medium text-slate-500 transition hover:bg-white hover:text-slate-900 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-slate-100'
         aria-label='Cari dokumentasi'
       >
         <Search className='size-3.5 shrink-0' />
         <span className='hidden sm:inline'>Cari dokumentasi...</span>
-        <kbd className='pointer-events-none hidden h-5 items-center rounded-md border border-slate-200 bg-slate-50 px-1.5 font-mono text-[10px] text-slate-400 md:inline-flex'>
+        <kbd className='pointer-events-none hidden h-5 items-center rounded-md border border-slate-200 bg-slate-50 px-1.5 font-mono text-[10px] text-slate-400 md:inline-flex dark:border-slate-700 dark:bg-slate-800 dark:text-slate-500'>
           Ctrl K
         </kbd>
       </button>

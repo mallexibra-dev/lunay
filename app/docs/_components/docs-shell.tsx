@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { ArrowLeft, BookOpen, Menu, X } from 'lucide-react';
 import type { DocsNavSection } from '@/types/docs';
 import { DocsSearch } from './DocsSearch';
+import { ThemeToggle } from './theme-toggle';
 
 export const DocsShell = ({
   sections,
@@ -23,11 +24,13 @@ export const DocsShell = ({
   const sidebar = (
     <nav className='flex flex-col gap-7 px-3 py-5'>
       {sections.length === 0 && (
-        <p className='px-3 text-xs text-slate-400'>Belum ada dokumentasi.</p>
+        <p className='px-3 text-xs text-slate-400 dark:text-slate-600'>
+          Belum ada dokumentasi.
+        </p>
       )}
       {sections.map((section) => (
         <div key={section.slug}>
-          <p className='mb-2 px-3 text-[11px] font-semibold tracking-[0.08em] text-slate-400 uppercase'>
+          <p className='mb-2 px-3 text-[11px] font-semibold tracking-[0.08em] text-slate-400 uppercase dark:text-slate-500'>
             {section.title}
           </p>
           <div className='flex flex-col gap-0.5'>
@@ -41,7 +44,7 @@ export const DocsShell = ({
                   className={`rounded-lg px-3 py-2 text-sm leading-snug transition ${
                     active
                       ? 'bg-primary font-medium text-primary-foreground shadow-sm'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100'
                   }`}
                 >
                   {item.title}
@@ -55,13 +58,13 @@ export const DocsShell = ({
   );
 
   return (
-    <div className='min-h-screen bg-slate-50 text-foreground'>
-      <header className='sticky top-0 z-30 border-b border-slate-200/80 bg-white/90 backdrop-blur-md'>
+    <div className='min-h-screen bg-slate-50 text-foreground dark:bg-slate-950'>
+      <header className='sticky top-0 z-30 border-b border-slate-200/80 bg-white/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/90'>
         <div className='flex h-14 items-center justify-between gap-3 px-4 lg:px-6'>
           <div className='flex min-w-0 items-center gap-3'>
             <button
               onClick={() => setOpen((v) => !v)}
-              className='inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 lg:hidden'
+              className='inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 lg:hidden dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'
               aria-label='Menu dokumentasi'
             >
               {open ? <X className='size-4' /> : <Menu className='size-4' />}
@@ -75,10 +78,10 @@ export const DocsShell = ({
                 <BookOpen className='size-4' />
               </span>
               <span className='min-w-0 leading-tight'>
-                <span className='block truncate text-sm font-semibold text-slate-900'>
+                <span className='block truncate text-sm font-semibold text-slate-900 dark:text-slate-100'>
                   Dokumentasi
                 </span>
-                <span className='hidden truncate text-[11px] text-slate-500 sm:block'>
+                <span className='hidden truncate text-[11px] text-slate-500 sm:block dark:text-slate-400'>
                   Next.js Starter Kit
                 </span>
               </span>
@@ -86,9 +89,10 @@ export const DocsShell = ({
           </div>
           <div className='flex shrink-0 items-center gap-2'>
             <DocsSearch sections={sections} />
+            <ThemeToggle />
             <Link
               href='/'
-              className='inline-flex h-9 shrink-0 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3.5 text-xs font-medium text-slate-700 transition hover:bg-white hover:text-slate-900 hover:shadow-sm'
+              className='inline-flex h-9 shrink-0 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3.5 text-xs font-medium text-slate-700 transition hover:bg-white hover:text-slate-900 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-50'
             >
               <ArrowLeft className='size-3.5' />
               <span className='hidden sm:inline'>Kembali ke aplikasi</span>
@@ -99,7 +103,7 @@ export const DocsShell = ({
 
       <div className='flex'>
         <aside
-          className={`fixed top-14 z-20 h-[calc(100vh-3.5rem)] w-72 shrink-0 overflow-y-auto border-r border-slate-200/80 bg-white transition-transform lg:sticky lg:translate-x-0 ${
+          className={`fixed top-14 z-20 no-scrollbar h-[calc(100vh-3.5rem)] w-72 shrink-0 overflow-y-auto border-r border-slate-200/80 bg-white transition-transform lg:sticky lg:translate-x-0 dark:border-slate-800 dark:bg-slate-900 ${
             open ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
