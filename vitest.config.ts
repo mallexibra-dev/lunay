@@ -8,6 +8,8 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
+    // 'threads' lebih stabil daripada 'forks' (default) di Windows
+    pool: 'threads',
     css: true,
     coverage: {
       reporter: ['text', 'json', 'html'],

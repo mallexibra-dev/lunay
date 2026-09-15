@@ -1,1 +1,1 @@
-// Test setup file - will be populated when tests are run
+import '@testing-library/jest-dom/vitest';
