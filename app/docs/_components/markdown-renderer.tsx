@@ -1,6 +1,8 @@
 'use client';
 
 import path from 'node:path';
+import { useRef, useState, type ReactNode } from 'react';
+import { Check, Copy } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
@@ -17,6 +19,46 @@ const resolveImageUrl = (raw: string, mediaBase: string) => {
   }
   const resolved = path.posix.normalize(path.posix.join(mediaBase, raw));
   return resolved.startsWith(`${mediaBase}/`) ? resolved : raw;
+};
+
+const CodeBlock = ({ children }: { children?: ReactNode }) => {
+  const preRef = useRef<HTMLPreElement>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    const text = preRef.current?.innerText ?? '';
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  return (
+    <div className='group relative my-6'>
+      <pre
+        ref={preRef}
+        className='no-scrollbar overflow-x-auto rounded-xl border border-slate-800 bg-slate-900 px-4 py-3.5 pr-12 text-slate-100 dark:border-slate-700/60 dark:bg-slate-950'
+      >
+        {children}
+      </pre>
+      <button
+        type='button'
+        onClick={handleCopy}
+        aria-label={copied ? 'Kode tersalin' : 'Salin kode'}
+        title={copied ? 'Tersalin' : 'Salin kode'}
+        className='absolute top-2 right-2 inline-flex h-8 w-8 items-center justify-center rounded-md border border-slate-600/60 bg-slate-800/80 text-slate-300 transition hover:text-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-400 dark:hover:text-slate-100'
+      >
+        {copied ? (
+          <Check className='size-3.5' />
+        ) : (
+          <Copy className='size-3.5' />
+        )}
+      </button>
+    </div>
+  );
 };
 
 export const MarkdownRenderer = ({
@@ -147,11 +189,7 @@ export const MarkdownRenderer = ({
               </code>
             );
           },
-          pre: ({ children }) => (
-            <pre className='my-6 no-scrollbar overflow-x-auto rounded-xl border border-slate-800 bg-slate-900 px-4 py-3.5 text-slate-100 dark:border-slate-700/60 dark:bg-slate-950'>
-              {children}
-            </pre>
-          ),
+          pre: ({ children }) => <CodeBlock>{children}</CodeBlock>,
           table: ({ children }) => (
             <div className='my-6 no-scrollbar overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800'>
               <table className='w-full border-collapse text-sm'>

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight, BookMarked, ChevronRight } from 'lucide-react';
 import { getDocsNav, getDocsPage } from '@/lib/docs/queries';
 import { MarkdownRenderer } from '../_components/markdown-renderer';
+import { CopyPageButton } from '../_components/copy-page-button';
 
 const humanize = (value: string) =>
   value
@@ -53,14 +54,23 @@ export default async function DocsPage({
           )}
         </nav>
 
-        <h1 className='text-3xl font-semibold tracking-tight text-slate-900 lg:text-[2rem] lg:leading-tight dark:text-slate-50'>
-          {page.title}
-        </h1>
-        {page.description && (
-          <p className='mt-3 text-[15px] leading-relaxed text-slate-500 dark:text-slate-400'>
-            {page.description}
-          </p>
-        )}
+        <div className='flex flex-wrap items-start justify-between gap-4'>
+          <div className='min-w-0'>
+            <h1 className='text-3xl font-semibold tracking-tight text-slate-900 lg:text-[2rem] lg:leading-tight dark:text-slate-50'>
+              {page.title}
+            </h1>
+            {page.description && (
+              <p className='mt-3 text-[15px] leading-relaxed text-slate-500 dark:text-slate-400'>
+                {page.description}
+              </p>
+            )}
+          </div>
+          <CopyPageButton
+            title={page.title}
+            description={page.description}
+            content={page.content}
+          />
+        </div>
       </div>
 
       <div className='overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900'>
