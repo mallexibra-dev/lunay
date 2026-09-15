@@ -1,18 +1,19 @@
 ---
 title: Dokumentasi
-description: Panduan penggunaan Next.js Starter Kit.
+description: Panduan lengkap penggunaan Next.js Starter Kit.
 ---
 
-Selamat datang di dokumentasi **Next.js Starter Kit**. Starter kit ini dirancang sebagai titik awal aplikasi Next.js modern yang siap produksi.
+Selamat datang di dokumentasi **Next.js Starter Kit** — titik awal aplikasi Next.js yang siap produksi dengan perkakas modern yang sudah terkonfigurasi.
 
-## Apa saja di dalamnya
+## Apa saja isinya
 
-- **Next.js 16** dengan App Router dan React 19
-- **TypeScript** dengan konfigurasi strict
-- **Tailwind CSS v4** + komponen **shadcn/ui**
-- **Drizzle ORM** untuk akses database
-- **TanStack React Query** untuk state server
+- **Next.js 16** (App Router, Turbopack) + **React 19** + **TypeScript**
+- **Tailwind CSS v4** dengan tema berbasis token (terang/gelap) dan **shadcn/ui**
+- **Drizzle ORM** + PostgreSQL dengan pola koneksi siap serverless
+- **TanStack React Query** untuk state server, sudah terpasang di root layout
+- **Axios** dengan interceptor terstruktur untuk klien API
 - **React Hook Form + Zod** untuk form dan validasi
-- **Vitest + Testing Library** untuk pengujian
+- **Winston** untuk logging terstruktur, plus proxy dengan security header dan rate limiting
+- **Vitest + React Testing Library** untuk pengujian
 
-Pilih modul di bawah untuk mulai menjelajah.
+Mulai dari [Panduan Awal](/docs/panduan-awal), atau pilih modul di bawah.
