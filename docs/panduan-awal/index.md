@@ -25,7 +25,7 @@ Dokumentasi ini bersifat internal dan menjadi acuan baku bagi seluruh proyek Nex
 
 1. **Konvensi di atas konfigurasi.** Alias `@/` menunjuk `src/`, skema Zod di `src/validations/`, tabel database di `src/db/schema.ts`. Anda tidak perlu memutuskan ulang hal yang sama setiap kali membuat file baru.
 2. **Type-safe dari ujung ke ujung.** Skema Zod menghasilkan tipe form, skema Drizzle menghasilkan tipe baris database, dan helper API membungkus respons dengan tipe generik.
-3. **Siap serverless sejak awal.** Koneksi database memakai `max: 1` dan `prepare: false`, dan middleware Next.js 16 (`src/proxy.ts`) membungkus setiap request dengan security header dan rate limiting.
+3. **Siap serverless sejak awal.** Koneksi database memakai `max: 1` dan `prepare: false`, dan middleware Next.js 16 (`proxy.ts`) membungkus setiap request dengan security header dan rate limiting.
 
 ## Langkah berikutnya
 

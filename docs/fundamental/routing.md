@@ -116,4 +116,4 @@ Wrapper `api.get<TContext>()` meneruskan context apa pun yang diberikan Next.js 
 
 ## Middleware
 
-Semua request melewati `src/proxy.ts` (middleware Next.js 16) kecuali aset statis. Di situ setiap request mendapat security header, dan request `/api/*` mendapat rate limiting serta CORS. Detailnya di [Logging & Middleware](/docs/panduan-teknis).
+Semua request melewati `proxy.ts` (middleware Next.js 16) kecuali aset statis. Di situ setiap request mendapat security header, dan request `/api/*` mendapat rate limiting serta CORS. Detailnya di [Logging & Middleware](/docs/panduan-teknis).

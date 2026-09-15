@@ -28,7 +28,7 @@ Ingat: variabel `NEXT_PUBLIC_` dibundel saat build, jadi nilainya harus sudah be
 
 ## Checklist pra-deploy
 
-1. **CORS di `src/proxy.ts`**: ganti `https://yourdomain.com` di `allowedOrigins` dengan domain Anda.
+1. **CORS di `proxy.ts`**: ganti `https://yourdomain.com` di `allowedOrigins` dengan domain Anda.
 2. **Migrasi database**: jalankan `bun run db:migrate` (atau terapkan file SQL dari folder `drizzle/`) sebelum aplikasi start.
 3. **Folder `logs/`**: Winston menulis ke `logs/error.log` dan `logs/combined.log`; pastikan proses punya izin menulis, atau alihkan ke penyimpanan log Anda.
 4. **Rate limiting**: penyimpanan di memori hanya valid untuk satu instance. Untuk beberapa instance/replica, pindahkan store ke Redis.

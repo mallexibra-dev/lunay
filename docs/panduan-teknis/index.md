@@ -78,7 +78,7 @@ logger.add(new winston.transports.Http({ host: 'log-collector', port: 80 }));
 
 ## Proxy middleware
 
-`src/proxy.ts` adalah middleware Next.js 16 (pengganti `middleware.ts`) yang membungkus setiap request:
+`proxy.ts` di root proyek adalah middleware Next.js 16 (pengganti `middleware.ts`) yang membungkus setiap request. Posisinya wajib sejajar dengan folder `app/`: karena starter ini menaruh `app/` di root (bukan `src/app/`), Next.js hanya mengenali `proxy.ts` di root proyek. File bernama sama di dalam `src/` diabaikan tanpa error, jadi periksa baris `Proxy (Middleware)` pada output `bun run build` bila ragu:
 
 1. **Security header** pada semua respons: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, dan `Referrer-Policy: strict-origin-when-cross-origin`.
 2. **Rate limiting** untuk `/api/*`: 100 request per 15 menit per kombinasi IP+path. Melebihi itu mendapat `429` dengan body `{ success: false, message: 'Too many requests' }`.
@@ -96,7 +96,7 @@ Header rate limit yang terpasang pada respons API yang lolos:
 Sesuaikan daftar origin saat deploy:
 
 ```ts
-// src/proxy.ts
+// proxy.ts
 const allowedOrigins = [
   'http://localhost:3000',
   'https://yourdomain.com', // ganti dengan domain produksi Anda

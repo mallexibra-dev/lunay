@@ -18,6 +18,7 @@ website-starter/
 │   └── page.tsx                #   Halaman beranda
 ├── docs/                       # Sumber markdown untuk halaman /docs
 ├── drizzle/                    # File migrasi hasil db:generate
+├── scripts/                    # Script utilitas (generator auth: bun run auth)
 ├── public/                     # Aset statis
 ├── src/
 │   ├── components/
@@ -37,10 +38,10 @@ website-starter/
 │   ├── types/                  # Tipe TypeScript bersama
 │   ├── utils/                  # Helper kecil (formatter tanggal, angka, teks)
 │   ├── validations/            # Skema Zod, satu file per domain
-│   ├── env.ts                  # Akses variabel lingkungan
-│   └── proxy.ts                # Middleware: security header, rate limit, CORS
+│   └── env.ts                  # Akses variabel lingkungan
 ├── .env                        # Variabel lingkungan (tidak di-commit)
 ├── .env.example                # Template variabel lingkungan untuk tim
+├── proxy.ts                    # Middleware: security header, rate limit, CORS
 ├── drizzle.config.ts           # Konfigurasi drizzle-kit
 └── vitest.config.ts            # Konfigurasi Vitest
 ```
@@ -58,7 +59,7 @@ website-starter/
 
 Sebagai gambaran bagaimana bagian-bagian proyek saling terhubung, ini alur request `POST /api/users`:
 
-1. **`src/proxy.ts`** menerima request lebih dulu: mencatat log, memeriksa rate limit (100 request per 15 menit per IP+path untuk `/api/*`), dan menempelkan security header.
+1. **`proxy.ts`** (di root proyek) menerima request lebih dulu: mencatat log, memeriksa rate limit (100 request per 15 menit per IP+path untuk `/api/*`), dan menempelkan security header.
 2. **Route handler** di `app/api/users/route.ts` (dibungkus `api.post(...)` dari `src/lib/api-utils.ts`) memvalidasi body dengan skema Zod dari `src/validations/`.
 3. **`getDb()`** dari `src/db/index.ts` menjalankan query Drizzle berdasarkan tabel di `src/db/schema.ts`, dan helper `logDatabaseOperation` mencatat durasinya.
 4. **`success()`** membungkus hasil menjadi JSON dengan bentuk `{ success, message, data, meta }`, lalu wrapper mencatat log respons beserta durasinya.
