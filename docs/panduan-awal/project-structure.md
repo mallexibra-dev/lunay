@@ -8,39 +8,59 @@ order: 2
 
 ```
 website-starter/
-├── app/                    # Route dan halaman (App Router)
-│   ├── docs/               #   Halaman dokumentasi (markdown → page)
-│   ├── layout.tsx          #   Root layout + React Query provider
-│   └── page.tsx            #   Halaman beranda
-├── docs/                   # Sumber markdown untuk halaman /docs
-├── drizzle/                # File migrasi hasil db:generate
-├── public/                 # Aset statis
+├── app/                        # Route dan halaman (App Router)
+│   ├── docs/                   #   Halaman dokumentasi (markdown → page)
+│   │   ├── _components/        #     Shell, sidebar, search, theme toggle, renderer
+│   │   ├── [[...slug]]/        #     Catch-all: /docs, /docs/<section>/<halaman>
+│   │   └── media/[...path]/    #     Route handler penyaji gambar dokumentasi
+│   ├── api/                    #   Route handler (contoh: app/api/users/route.ts)
+│   ├── layout.tsx              #   Root layout: font, ThemeProvider, React Query
+│   └── page.tsx                #   Halaman beranda
+├── docs/                       # Sumber markdown untuk halaman /docs
+├── drizzle/                    # File migrasi hasil db:generate
+├── public/                     # Aset statis
 ├── src/
 │   ├── components/
-│   │   ├── ui/             #   Komponen shadcn/ui
-│   │   └── layouts/        #   Provider (React Query, dsb.)
-│   ├── db/                 # Koneksi Drizzle, skema, seeder
-│   ├── hooks/              # Custom React hooks
-│   ├── lib/                # Utilitas inti
-│   │   ├── axios.ts        #   Instance ApiClient + interceptor
-│   │   ├── api-utils.ts    #   Wrapper route handler + helper respons
-│   │   ├── query-client.ts #   Konfigurasi React Query
-│   │   ├── logger.ts       #   Winston + helper logging
-│   │   └── utils.ts        #   cn() untuk merge class Tailwind
-│   ├── styles/             # globals.css (Tailwind) + variables.css (token tema)
-│   ├── test/               # Setup dan file test (Vitest)
-│   ├── types/              # Tipe TypeScript bersama
-│   ├── utils/              # Helper kecil (formatter tanggal, dll.)
-│   ├── validations/        # Skema Zod
-│   ├── env.ts              # Akses variabel lingkungan
-│   └── proxy.ts            # Middleware: security header, rate limit, CORS
-├── .env                    # Variabel lingkungan (tidak di-commit)
-└── drizzle.config.ts       # Konfigurasi drizzle-kit
+│   │   ├── ui/                 #   Komponen shadcn/ui (50+ file, milik proyek)
+│   │   └── layouts/            #   Provider: React Query, next-themes
+│   ├── db/                     # index.ts (koneksi), schema.ts, seed.ts
+│   ├── hooks/                  # Custom React hooks (mis. use-mobile)
+│   ├── lib/
+│   │   ├── axios.ts            #   ApiClient (Axios) + interceptor + helper token
+│   │   ├── api-utils.ts        #   Wrapper route handler + helper respons
+│   │   ├── query-client.ts     #   Instance QueryClient (default global)
+│   │   ├── docs/queries.ts     #   Pembaca filesystem untuk halaman /docs
+│   │   ├── logger.ts           #   Winston + helper logging
+│   │   └── utils.ts            #   cn() untuk merge class Tailwind
+│   ├── styles/                 # globals.css (Tailwind) + variables.css (token tema)
+│   ├── test/                   # Setup, file test, dan mock MSW (Vitest)
+│   ├── types/                  # Tipe TypeScript bersama
+│   ├── utils/                  # Helper kecil (formatter tanggal, angka, teks)
+│   ├── validations/            # Skema Zod, satu file per domain
+│   ├── env.ts                  # Akses variabel lingkungan
+│   └── proxy.ts                # Middleware: security header, rate limit, CORS
+├── .env                        # Variabel lingkungan (tidak di-commit)
+├── .env.example                # Template variabel lingkungan untuk tim
+├── drizzle.config.ts           # Konfigurasi drizzle-kit
+└── vitest.config.ts            # Konfigurasi Vitest
 ```
 
 ## Konvensi
 
-- **Alias `@/`** menunjuk ke folder `src/` — contoh: `import { cn } from '@/lib/utils'`.
-- **Komponen shadcn** berada di `src/components/ui` dan dipanggil langsung, tanpa index barrel.
-- **Halaman dokumentasi** juga berupa file markdown di `docs/` — folder menjadi bagian navigasi, mesin rendernya ada di `app/docs/[[...slug]]/page.tsx`.
-- **Skema Zod** diletakkan di `src/validations/`, satu file per domain.
+- **Alias `@/`** menunjuk ke folder `src/`. Contoh: `import { cn } from '@/lib/utils'`.
+- **Komponen shadcn** berada di `src/components/ui` dan diimpor langsung dari pathnya, tanpa index barrel.
+- **Skema Zod** diletakkan di `src/validations/`, satu file per domain (mis. `user.ts` untuk semua skema terkait user).
+- **Tabel database** dideklarasikan di `src/db/schema.ts` dan didaftarkan ke objek `schema` di `src/db/index.ts`.
+- **Halaman dokumentasi** berupa file markdown di `docs/`. Nama folder menjadi bagian navigasi, dan mesin rendernya ada di `app/docs/[[...slug]]/page.tsx`.
+- **Folder dengan awalan underscore** seperti `app/docs/_components` diabaikan Next.js sebagai route; isinya hanya komponen pendukung.
+
+## Alur satu request
+
+Sebagai gambaran bagaimana bagian-bagian proyek saling terhubung, ini alur request `POST /api/users`:
+
+1. **`src/proxy.ts`** menerima request lebih dulu: mencatat log, memeriksa rate limit (100 request per 15 menit per IP+path untuk `/api/*`), dan menempelkan security header.
+2. **Route handler** di `app/api/users/route.ts` (dibungkus `api.post(...)` dari `src/lib/api-utils.ts`) memvalidasi body dengan skema Zod dari `src/validations/`.
+3. **`getDb()`** dari `src/db/index.ts` menjalankan query Drizzle berdasarkan tabel di `src/db/schema.ts`, dan helper `logDatabaseOperation` mencatat durasinya.
+4. **`success()`** membungkus hasil menjadi JSON dengan bentuk `{ success, message, data, meta }`, lalu wrapper mencatat log respons beserta durasinya.
+
+Di sisi browser, komponen memanggil endpoint tersebut lewat `apiClient` (`src/lib/axios.ts`) di dalam `useQuery`/`useMutation` dari React Query.

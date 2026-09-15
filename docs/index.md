@@ -3,7 +3,7 @@ title: Dokumentasi
 description: Panduan lengkap penggunaan Next.js Starter Kit.
 ---
 
-Selamat datang di dokumentasi **Next.js Starter Kit** — titik awal aplikasi Next.js yang siap produksi dengan perkakas modern yang sudah terkonfigurasi.
+Selamat datang di **dokumentasi internal Codasia** untuk Next.js Starter Kit. Dokumen ini adalah acuan baku yang dipakai di seluruh proyek Next.js Codasia: cara memasang, struktur proyek, konvensi, hingga pola pemakaian setiap lapisan. Saat memulai proyek baru, perlakukan semua yang tertulis di sini sebagai standar tim.
 
 ## Apa saja isinya
 
@@ -15,5 +15,17 @@ Selamat datang di dokumentasi **Next.js Starter Kit** — titik awal aplikasi Ne
 - **React Hook Form + Zod** untuk form dan validasi
 - **Winston** untuk logging terstruktur, plus proxy dengan security header dan rate limiting
 - **Vitest + React Testing Library** untuk pengujian
+- **Dark mode** siap pakai lewat `next-themes`, dengan tombol ganti tema di halaman `/docs`
 
-Mulai dari [Panduan Awal](/docs/panduan-awal), atau pilih modul di bawah.
+## Peta dokumentasi
+
+| Modul                                  | Isi                                                  |
+| -------------------------------------- | ---------------------------------------------------- |
+| [Panduan Awal](/docs/panduan-awal)     | Instalasi, struktur proyek, dan perintah CLI         |
+| [Konsep Dasar](/docs/fundamental)      | Variabel lingkungan, routing, styling, dan dark mode |
+| [Database](/docs/database)             | Koneksi Drizzle, skema, migrasi, query, dan seeding  |
+| [Data Fetching](/docs/data-fetching)   | Klien API Axios dan React Query                      |
+| [Antarmuka](/docs/antarmuka)           | Komponen shadcn/ui serta form + validasi             |
+| [Panduan Teknis](/docs/panduan-teknis) | Logging, middleware, testing, dan deployment         |
+
+Mulai dari [Instalasi](/docs/panduan-awal/installation), atau pilih modul di atas.
