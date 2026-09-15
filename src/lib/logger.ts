@@ -74,7 +74,7 @@ export function logApiRequest(
     method: string;
     url: string;
     headers: Record<string, string>;
-    body?: any;
+    body?: unknown;
   },
   startTime?: number
 ) {
@@ -175,7 +175,7 @@ export function logAuthEvent(
 // Security event logger helper
 export function logSecurityEvent(
   event: string,
-  details: Record<string, any>,
+  details: Record<string, unknown>,
   ip?: string
 ) {
   logger.warn('Security Event', {
@@ -190,7 +190,7 @@ export function logSecurityEvent(
 export function logPerformance(
   operation: string,
   duration: number,
-  details?: Record<string, any>
+  details?: Record<string, unknown>
 ) {
   const level = duration > 1000 ? 'warn' : 'info'; // Warn if operation takes more than 1 second
 

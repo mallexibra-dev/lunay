@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 import { logger } from '@/lib/logger';
 
 // Standard API response types
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   message: string;
   data?: T;
@@ -24,7 +24,7 @@ export interface ApiError {
 }
 
 // Helper function to create consistent responses
-export function createResponse<T = any>(
+export function createResponse<T = unknown>(
   success: boolean,
   message: string,
   data?: T,
@@ -53,7 +53,7 @@ export function createResponse<T = any>(
 }
 
 // Success response helper
-export function success<T = any>(
+export function success<T = unknown>(
   data: T,
   message: string = 'Operation successful',
   options: { status?: number; requestId?: string } = {}
@@ -88,10 +88,18 @@ export const apiError = {
 };
 
 // API wrapper for consistent error handling and logging
-export function withApiHandler(
-  handler: (req: NextRequest, context?: any) => Promise<NextResponse>
+type ApiHandler<TContext = unknown> = (
+  req: NextRequest,
+  context?: TContext
+) => Promise<NextResponse>;
+
+export function withApiHandler<TContext = unknown>(
+  handler: ApiHandler<TContext>
 ) {
-  return async (req: NextRequest, context?: any): Promise<NextResponse> => {
+  return async (
+    req: NextRequest,
+    context?: TContext
+  ): Promise<NextResponse> => {
     const startTime = Date.now();
     const url = req.nextUrl.pathname;
     const method = req.method;
@@ -169,34 +177,32 @@ function getErrorStatusCode(error: unknown): number {
 
 // HTTP method helpers
 export const api = {
-  get: (handler: (req: NextRequest, context?: any) => Promise<NextResponse>) =>
-    withApiHandler(async (req, context) => {
+  get: <TContext = unknown>(handler: ApiHandler<TContext>) =>
+    withApiHandler(async (req: NextRequest, context?: TContext) => {
       if (req.method !== 'GET') {
         return apiError.validation('Method not allowed');
       }
       return handler(req, context);
     }),
 
-  post: (handler: (req: NextRequest, context?: any) => Promise<NextResponse>) =>
-    withApiHandler(async (req, context) => {
+  post: <TContext = unknown>(handler: ApiHandler<TContext>) =>
+    withApiHandler(async (req: NextRequest, context?: TContext) => {
       if (req.method !== 'POST') {
         return apiError.validation('Method not allowed');
       }
       return handler(req, context);
     }),
 
-  put: (handler: (req: NextRequest, context?: any) => Promise<NextResponse>) =>
-    withApiHandler(async (req, context) => {
+  put: <TContext = unknown>(handler: ApiHandler<TContext>) =>
+    withApiHandler(async (req: NextRequest, context?: TContext) => {
       if (req.method !== 'PUT') {
         return apiError.validation('Method not allowed');
       }
       return handler(req, context);
     }),
 
-  delete: (
-    handler: (req: NextRequest, context?: any) => Promise<NextResponse>
-  ) =>
-    withApiHandler(async (req, context) => {
+  delete: <TContext = unknown>(handler: ApiHandler<TContext>) =>
+    withApiHandler(async (req: NextRequest, context?: TContext) => {
       if (req.method !== 'DELETE') {
         return apiError.validation('Method not allowed');
       }
@@ -205,7 +211,7 @@ export const api = {
 };
 
 // Helper to parse request body safely
-export async function parseRequestBody(req: NextRequest): Promise<any> {
+export async function parseRequestBody(req: NextRequest): Promise<unknown> {
   try {
     const contentType = req.headers.get('content-type');
     if (contentType?.includes('application/json')) {
