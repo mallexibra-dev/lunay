@@ -67,20 +67,33 @@ export const getDocsNav = (): DocsNavSection[] => {
 
       // index.md level section: urutan section dari frontmatter, judul tetap nama modul
       if (isIndex && segments.length === 2) {
-        if (typeof frontmatter.order === 'number') sectionOrder = frontmatter.order;
+        if (typeof frontmatter.order === 'number')
+          sectionOrder = frontmatter.order;
       }
 
       items.push({
         title:
           frontmatter.title ??
-          (isIndex ? 'Pengantar' : humanizeFileName(segments[segments.length - 1])),
+          (isIndex
+            ? 'Pengantar'
+            : humanizeFileName(segments[segments.length - 1])),
         slug: urlSlug,
-        order: typeof frontmatter.order === 'number' ? frontmatter.order : isIndex ? 0 : FALLBACK_ORDER,
+        order:
+          typeof frontmatter.order === 'number'
+            ? frontmatter.order
+            : isIndex
+              ? 0
+              : FALLBACK_ORDER,
       });
     }
 
     items.sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
-    sections.push({ title: sectionTitle, slug: entry.name, order: sectionOrder, items });
+    sections.push({
+      title: sectionTitle,
+      slug: entry.name,
+      order: sectionOrder,
+      items,
+    });
   }
 
   sections.sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
@@ -89,7 +102,10 @@ export const getDocsNav = (): DocsNavSection[] => {
 
 const flattenNavLinks = (sections: DocsNavSection[]): DocsPageLink[] =>
   sections.flatMap((section) =>
-    section.items.map((item) => ({ title: item.title, href: `/docs/${item.slug.join('/')}` }))
+    section.items.map((item) => ({
+      title: item.title,
+      href: `/docs/${item.slug.join('/')}`,
+    }))
   );
 
 const isSafeSlug = (slug: string[]) =>
@@ -103,7 +119,10 @@ const isSafeSlug = (slug: string[]) =>
       !segment.includes('/')
   );
 
-const buildPageData = (absFile: string, sections: DocsNavSection[]): DocsPageData => {
+const buildPageData = (
+  absFile: string,
+  sections: DocsNavSection[]
+): DocsPageData => {
   const { frontmatter, content } = readDocFile(absFile);
   const { urlSlug } = slugFromFile(absFile);
   const href = urlSlug.length > 0 ? `/docs/${urlSlug.join('/')}` : '/docs';
@@ -139,10 +158,13 @@ export const getDocsPage = (slug: string[]): DocsPageData | null => {
 
   // /docs/getting-started -> coba getting-started.md lalu getting-started/index.md
   const candidates =
-    slug.length > 0 && slug[slug.length - 1] !== 'index' ? [slug, [...slug, 'index']] : [slug];
+    slug.length > 0 && slug[slug.length - 1] !== 'index'
+      ? [slug, [...slug, 'index']]
+      : [slug];
   for (const candidate of candidates) {
     const resolved = path.resolve(DOCS_ROOT, ...candidate);
-    if (resolved !== DOCS_ROOT && !resolved.startsWith(DOCS_ROOT + path.sep)) return null;
+    if (resolved !== DOCS_ROOT && !resolved.startsWith(DOCS_ROOT + path.sep))
+      return null;
 
     const absFile =
       resolved === DOCS_ROOT

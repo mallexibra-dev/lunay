@@ -15,7 +15,10 @@ const MIME: Record<string, string> = {
   '.svg': 'image/svg+xml',
 };
 
-export async function GET(_req: Request, { params }: { params: Promise<{ path: string[] }> }) {
+export async function GET(
+  _req: Request,
+  { params }: { params: Promise<{ path: string[] }> }
+) {
   const { path: segments } = await params;
 
   const isSafe =

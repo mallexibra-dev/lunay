@@ -23,7 +23,8 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Get client IP
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] ||
+  const ip =
+    request.headers.get('x-forwarded-for')?.split(',')[0] ||
     request.headers.get('x-real-ip') ||
     'unknown';
 
@@ -59,7 +60,10 @@ export async function proxy(request: NextRequest) {
           method: request.method,
           url: pathname,
           headers: Object.fromEntries(request.headers.entries()),
-          body: request.method !== 'GET' ? await safeParseBody(request.clone()) : undefined,
+          body:
+            request.method !== 'GET'
+              ? await safeParseBody(request.clone())
+              : undefined,
         },
         startTime
       );
@@ -76,8 +80,14 @@ export async function proxy(request: NextRequest) {
 
     // Add rate limit headers
     response.headers.set('X-RateLimit-Limit', '100');
-    response.headers.set('X-RateLimit-Remaining', String(100 - rateLimitResult.count));
-    response.headers.set('X-RateLimit-Reset', String(rateLimitResult.resetTime));
+    response.headers.set(
+      'X-RateLimit-Remaining',
+      String(100 - rateLimitResult.count)
+    );
+    response.headers.set(
+      'X-RateLimit-Reset',
+      String(rateLimitResult.resetTime)
+    );
   }
 
   // Log API requests that pass through proxy
@@ -87,7 +97,10 @@ export async function proxy(request: NextRequest) {
         method: request.method,
         url: pathname,
         headers: Object.fromEntries(request.headers.entries()),
-        body: request.method !== 'GET' ? await safeParseBody(request.clone()) : undefined,
+        body:
+          request.method !== 'GET'
+            ? await safeParseBody(request.clone())
+            : undefined,
       },
       startTime
     );
@@ -103,8 +116,14 @@ export async function proxy(request: NextRequest) {
 
     if (allowedOrigins.includes(origin || '')) {
       response.headers.set('Access-Control-Allow-Origin', origin || '');
-      response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-      response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      response.headers.set(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PUT, DELETE, OPTIONS'
+      );
+      response.headers.set(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Authorization'
+      );
       response.headers.set('Access-Control-Allow-Credentials', 'true');
     }
 

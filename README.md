@@ -5,12 +5,14 @@ A comprehensive, production-ready Next.js 16 starter kit with all the modern too
 ## 🚀 Features
 
 ### ✅ Core Setup
+
 - **Next.js 16** with App Router
 - **TypeScript** for type safety
 - **Tailwind CSS v4** for styling
 - **ESLint** and **Prettier** for code quality
 
 ### 🔐 Authentication
+
 - **Better Auth** for modern authentication
 - Email/Password authentication
 - Social login (Google, GitHub) support
@@ -18,36 +20,42 @@ A comprehensive, production-ready Next.js 16 starter kit with all the modern too
 - Protected routes and API endpoints
 
 ### 🗄️ Database
+
 - **Drizzle ORM** with PostgreSQL
 - Type-safe database operations
 - Database migrations and seeding
 - Example schemas for users, posts, and categories
 
 ### 📝 Forms & Validation
+
 - **React Hook Form** for form management
 - **Valibot** for server and client validation
 - Custom form hooks and components
 - Form validation with real-time feedback
 
 ### 🔄 State Management
+
 - **TanStack Query** for server state
 - Custom hooks for API calls
 - Optimistic updates and caching
 - DevTools integration
 
 ### 🧪 Testing
+
 - **Vitest** for unit testing
 - **React Testing Library** for component testing
 - **MSW** for API mocking
 - Test utilities and examples
 
 ### 📊 Logging
+
 - **Winston** for structured logging
 - API request/response logging
 - Security event logging
 - Performance monitoring
 
 ### 🛡️ Security & Proxy
+
 - Request/response proxy layer
 - Rate limiting
 - CORS handling
@@ -55,6 +63,7 @@ A comprehensive, production-ready Next.js 16 starter kit with all the modern too
 - Authentication guards
 
 ### 📦 API Design
+
 - Consistent API response format
 - Error handling and validation
 - Type-safe API clients
@@ -97,22 +106,26 @@ src/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd nextjs-starterkit
    ```
 
 2. **Install dependencies**
+
    ```bash
    bun install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
 
    Configure the following variables in `.env.local`:
+
    ```env
    # Database
    DATABASE_URL="postgresql://username:password@localhost:5432/database_name"
@@ -129,6 +142,7 @@ src/
    ```
 
 4. **Set up the database**
+
    ```bash
    # Generate database migrations
    bun run db:generate
@@ -141,6 +155,7 @@ src/
    ```
 
 5. **Start the development server**
+
    ```bash
    bun run dev
    ```
@@ -150,16 +165,19 @@ src/
 ## 📚 Available Scripts
 
 ### Development
+
 - `bun run dev` - Start development server
 - `bun run build` - Build for production
 - `bun run start` - Start production server
 - `bun run lint` - Run ESLint
 
 ### Code Quality
+
 - `bun run format` - Format code with Prettier
 - `bun run format:check` - Check code formatting
 
 ### Database
+
 - `bun run db:generate` - Generate database migrations
 - `bun run db:migrate` - Run database migrations
 - `bun run db:push` - Push schema to database
@@ -167,6 +185,7 @@ src/
 - `bun run db:seed` - Seed database with sample data
 
 ### Testing
+
 - `bun run test` - Run tests in watch mode
 - `bun run test:run` - Run tests once
 - `bun run test:ui` - Run tests with UI
@@ -216,6 +235,7 @@ The proxy layer handles security, rate limiting, and request/response processing
 ### API Development
 
 1. **Create API Routes**
+
    ```typescript
    import { api } from '@/lib/api-handler';
 
@@ -238,6 +258,7 @@ The proxy layer handles security, rate limiting, and request/response processing
 ## 🧪 Testing
 
 ### Component Testing
+
 ```typescript
 import { render, screen } from '@testing-library/react';
 import { MyComponent } from '@/components';
@@ -249,6 +270,7 @@ test('renders component', () => {
 ```
 
 ### API Testing
+
 ```typescript
 import { describe, it, expect } from 'vitest';
 import { validateData } from '@/lib/validation';
@@ -262,11 +284,13 @@ test('validates data correctly', async () => {
 ## 🎨 Styling
 
 ### Tailwind CSS
+
 - Uses Tailwind CSS v4 with inline theme configuration
 - Custom CSS variables in `src/styles/variables.css`
 - Component variants with class-variance-authority
 
 ### Theme Customization
+
 - Modify design tokens in `variables.css`
 - Update Tailwind config for custom utilities
 - Use shadcn/ui components as base
@@ -274,18 +298,21 @@ test('validates data correctly', async () => {
 ## 📝 Best Practices
 
 ### Code Organization
+
 - Keep components focused and reusable
 - Use custom hooks for complex logic
 - Separate API calls from UI components
 - Maintain consistent file naming
 
 ### API Design
+
 - Use consistent response format
 - Implement proper error handling
 - Add comprehensive logging
 - Include request validation
 
 ### Performance
+
 - Use TanStack Query for caching
 - Implement code splitting
 - Optimize images and assets
@@ -294,18 +321,22 @@ test('validates data correctly', async () => {
 ## 🚀 Deployment
 
 ### Build for Production
+
 ```bash
 bun run build
 bun run start
 ```
 
 ### Environment Variables
+
 Ensure all required environment variables are set in production:
+
 - DATABASE_URL
 - AUTH_SECRET
 - OAuth credentials (if using social login)
 
 ### Database
+
 - Run migrations in production
 - Set up connection pooling
 - Configure backups

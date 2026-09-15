@@ -1,21 +1,21 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { QueryClientProviderWrapper } from "@/components/layouts/query-client-provider";
-import "@/styles/globals.css";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import { QueryClientProviderWrapper } from '@/components/layouts/query-client-provider';
+import '@/styles/globals.css';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Starter Kit",
-  description: "A comprehensive Next.js 16 starter kit with modern tools",
+  title: 'Next.js Starter Kit',
+  description: 'A comprehensive Next.js 16 starter kit with modern tools',
 };
 
 export default function RootLayout({
@@ -24,13 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryClientProviderWrapper>
-          {children}
-        </QueryClientProviderWrapper>
+        <QueryClientProviderWrapper>{children}</QueryClientProviderWrapper>
       </body>
     </html>
   );

@@ -39,25 +39,28 @@ export const DocsSearch = ({ sections }: { sections: DocsNavSection[] }) => {
   return (
     <>
       <button
-        type="button"
+        type='button'
         onClick={() => setOpen(true)}
-        className="inline-flex h-9 min-w-0 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-xs font-medium text-slate-500 transition hover:bg-white hover:text-slate-900 hover:shadow-sm"
-        aria-label="Cari dokumentasi"
+        className='inline-flex h-9 min-w-0 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-xs font-medium text-slate-500 transition hover:bg-white hover:text-slate-900 hover:shadow-sm'
+        aria-label='Cari dokumentasi'
       >
-        <Search className="size-3.5 shrink-0" />
-        <span className="hidden sm:inline">Cari dokumentasi...</span>
-        <kbd className="pointer-events-none hidden h-5 items-center rounded-md border border-slate-200 bg-slate-50 px-1.5 font-mono text-[10px] text-slate-400 md:inline-flex">
+        <Search className='size-3.5 shrink-0' />
+        <span className='hidden sm:inline'>Cari dokumentasi...</span>
+        <kbd className='pointer-events-none hidden h-5 items-center rounded-md border border-slate-200 bg-slate-50 px-1.5 font-mono text-[10px] text-slate-400 md:inline-flex'>
           Ctrl K
         </kbd>
       </button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <DialogTitle className="sr-only">Cari dokumentasi</DialogTitle>
-        <CommandInput placeholder="Cari modul atau halaman..." />
+        <DialogTitle className='sr-only'>Cari dokumentasi</DialogTitle>
+        <CommandInput placeholder='Cari modul atau halaman...' />
         <CommandList>
           <CommandEmpty>Tidak ada hasil.</CommandEmpty>
-          <CommandGroup heading="Umum">
-            <CommandItem value="Dokumentasi beranda" onSelect={() => goTo('/docs')}>
+          <CommandGroup heading='Umum'>
+            <CommandItem
+              value='Dokumentasi beranda'
+              onSelect={() => goTo('/docs')}
+            >
               <FileText />
               Dokumentasi
             </CommandItem>
