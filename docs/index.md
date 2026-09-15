@@ -16,6 +16,7 @@ Selamat datang di **dokumentasi internal Codasia** untuk Next.js Starter Kit. Do
 - **Winston** untuk logging terstruktur, plus proxy dengan security header dan rate limiting
 - **Vitest + React Testing Library** untuk pengujian
 - **Dark mode** siap pakai lewat `next-themes`, dengan tombol ganti tema di halaman `/docs`
+- **Autentikasi on-demand** via Better Auth: `bun run auth` menghasilkan wiring lengkap beserta halaman login/register
 
 ## Peta dokumentasi
 
@@ -26,6 +27,7 @@ Selamat datang di **dokumentasi internal Codasia** untuk Next.js Starter Kit. Do
 | [Database](/docs/database)             | Koneksi Drizzle, skema, migrasi, query, dan seeding  |
 | [Data Fetching](/docs/data-fetching)   | Klien API Axios dan React Query                      |
 | [Antarmuka](/docs/antarmuka)           | Komponen shadcn/ui serta form + validasi             |
+| [Autentikasi](/docs/autentikasi)       | Generator auth Better Auth dan arsitekturnya         |
 | [Panduan Teknis](/docs/panduan-teknis) | Logging, middleware, testing, dan deployment         |
 
 Mulai dari [Instalasi](/docs/panduan-awal/installation), atau pilih modul di atas.

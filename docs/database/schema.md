@@ -17,7 +17,7 @@ import {
   timestamp,
   integer,
   boolean,
-} from 'drizzle-orm/pg';
+} from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -45,7 +45,7 @@ Tipe kolom yang sering dipakai:
 Contoh enum dan kolom JSON:
 
 ```ts
-import { pgEnum, jsonb } from 'drizzle-orm/pg';
+import { pgEnum, jsonb } from 'drizzle-orm/pg-core';
 
 export const roleEnum = pgEnum('role', ['admin', 'member']);
 
@@ -62,7 +62,7 @@ Definisikan foreign key dan relasinya:
 
 ```ts
 import { relations } from 'drizzle-orm';
-import { pgTable, serial, text, integer } from 'drizzle-orm/pg';
+import { pgTable, serial, text, integer } from 'drizzle-orm/pg-core';
 
 export const posts = pgTable('posts', {
   id: serial('id').primaryKey(),

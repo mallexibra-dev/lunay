@@ -34,6 +34,12 @@ Semua perintah dijalankan dengan `bun run <script>`.
 
 `db:push` praktis untuk masa development; gunakan `db:generate` + `db:migrate` ketika perlu riwayat migrasi yang terkontrol.
 
+## Generator
+
+| Perintah | Fungsi                                                                               |
+| -------- | ------------------------------------------------------------------------------------ |
+| `auth`   | Generator autentikasi Better Auth (detail di modul [Autentikasi](/docs/autentikasi)) |
+
 ## Testing
 
 | Perintah        | Fungsi                                |
