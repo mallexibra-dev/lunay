@@ -42,6 +42,10 @@ out/
 build/
 dist/
 
+# Lockfiles
+package-lock.json
+bun.lock
+
 # Coverage
 coverage/
 

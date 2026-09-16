@@ -9,7 +9,9 @@ interface QueryClientProviderProps {
   children: ReactNode;
 }
 
-export function QueryClientProviderWrapper({ children }: QueryClientProviderProps) {
+export function QueryClientProviderWrapper({
+  children,
+}: QueryClientProviderProps) {
   return (
     <QueryClientProvider client={queryClient}>
       {children}

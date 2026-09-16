@@ -1,21 +1,25 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { QueryClientProviderWrapper } from "@/components/layouts/query-client-provider";
-import "@/styles/globals.css";
+import type { Metadata } from 'next';
+import { Geist_Mono, Poppins } from 'next/font/google';
+import { QueryClientProviderWrapper } from '@/components/layouts/query-client-provider';
+import { ThemeProvider } from '@/components/layouts/theme-provider';
+import '@/styles/globals.css';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const poppins = Poppins({
+  variable: '--font-poppins',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Starter Kit",
-  description: "A comprehensive Next.js 16 starter kit with modern tools",
+  title: 'Codasia Web Starter',
+  description:
+    'Starter kit internal Codasia: Next.js 16, Tailwind CSS v4, shadcn/ui, Drizzle ORM, React Query, dan dokumentasi teknis lengkap di /docs.',
 };
 
 export default function RootLayout({
@@ -24,13 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <QueryClientProviderWrapper>
-          {children}
-        </QueryClientProviderWrapper>
+    <html lang='en' suppressHydrationWarning>
+      <body className={`${poppins.variable} ${geistMono.variable} antialiased`}>
+        <ThemeProvider>
+          <QueryClientProviderWrapper>{children}</QueryClientProviderWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -11,6 +11,9 @@ export async function healthCheck() {
     await db.execute('SELECT 1');
     return { status: 'healthy', timestamp: new Date() };
   } catch (error) {
-    return { status: 'unhealthy', error: error instanceof Error ? error.message : 'Unknown error' };
+    return {
+      status: 'unhealthy',
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
   }
 }

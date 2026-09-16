@@ -37,7 +37,7 @@ export const logger = winston.createLogger({
   level: env.NODE_ENV === 'production' ? 'info' : 'debug',
   format: logFormat,
   defaultMeta: {
-    service: 'nextjs-starterkit',
+    service: 'codasia-web-starter',
     environment: env.NODE_ENV,
   },
   transports: [
@@ -69,12 +69,15 @@ if (env.NODE_ENV !== 'production') {
 }
 
 // API request logger helper
-export function logApiRequest(req: {
-  method: string;
-  url: string;
-  headers: Record<string, string>;
-  body?: any;
-}, startTime?: number) {
+export function logApiRequest(
+  req: {
+    method: string;
+    url: string;
+    headers: Record<string, string>;
+    body?: unknown;
+  },
+  startTime?: number
+) {
   const duration = startTime ? Date.now() - startTime : undefined;
 
   logger.info('API Request', {
@@ -88,12 +91,16 @@ export function logApiRequest(req: {
 }
 
 // API response logger helper
-export function logApiResponse(req: {
-  method: string;
-  url: string;
-}, res: {
-  statusCode: number;
-}, startTime: number) {
+export function logApiResponse(
+  req: {
+    method: string;
+    url: string;
+  },
+  res: {
+    statusCode: number;
+  },
+  startTime: number
+) {
   const duration = Date.now() - startTime;
   const level = res.statusCode >= 400 ? 'error' : 'info';
 
@@ -107,10 +114,14 @@ export function logApiResponse(req: {
 }
 
 // API error logger helper
-export function logApiError(req: {
-  method: string;
-  url: string;
-}, error: Error | string, statusCode?: number) {
+export function logApiError(
+  req: {
+    method: string;
+    url: string;
+  },
+  error: Error | string,
+  statusCode?: number
+) {
   logger.error('API Error', {
     type: 'api_error',
     method: req.method,
@@ -122,7 +133,12 @@ export function logApiError(req: {
 }
 
 // Database operation logger helper
-export function logDatabaseOperation(operation: string, table: string, duration?: number, error?: Error) {
+export function logDatabaseOperation(
+  operation: string,
+  table: string,
+  duration?: number,
+  error?: Error
+) {
   const level = error ? 'error' : 'info';
 
   logger.log(level, 'Database Operation', {
@@ -136,7 +152,13 @@ export function logDatabaseOperation(operation: string, table: string, duration?
 }
 
 // Authentication logger helper
-export function logAuthEvent(event: string, userId?: string | number, email?: string, ip?: string, error?: Error) {
+export function logAuthEvent(
+  event: string,
+  userId?: string | number,
+  email?: string,
+  ip?: string,
+  error?: Error
+) {
   const level = error ? 'error' : 'info';
 
   logger.log(level, 'Authentication Event', {
@@ -151,7 +173,11 @@ export function logAuthEvent(event: string, userId?: string | number, email?: st
 }
 
 // Security event logger helper
-export function logSecurityEvent(event: string, details: Record<string, any>, ip?: string) {
+export function logSecurityEvent(
+  event: string,
+  details: Record<string, unknown>,
+  ip?: string
+) {
   logger.warn('Security Event', {
     type: 'security_event',
     event,
@@ -161,7 +187,11 @@ export function logSecurityEvent(event: string, details: Record<string, any>, ip
 }
 
 // Performance logger helper
-export function logPerformance(operation: string, duration: number, details?: Record<string, any>) {
+export function logPerformance(
+  operation: string,
+  duration: number,
+  details?: Record<string, unknown>
+) {
   const level = duration > 1000 ? 'warn' : 'info'; // Warn if operation takes more than 1 second
 
   logger.log(level, 'Performance', {
