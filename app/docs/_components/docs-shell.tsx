@@ -24,13 +24,13 @@ export const DocsShell = ({
   const sidebar = (
     <nav className='flex flex-col gap-7 px-3 py-5'>
       {sections.length === 0 && (
-        <p className='px-3 text-xs text-slate-400 dark:text-slate-600'>
+        <p className='px-3 text-xs text-muted-foreground'>
           Belum ada dokumentasi.
         </p>
       )}
       {sections.map((section) => (
         <div key={section.slug}>
-          <p className='mb-2 px-3 text-[11px] font-semibold tracking-[0.08em] text-slate-400 uppercase dark:text-slate-500'>
+          <p className='mb-2 px-3 text-[11px] font-semibold tracking-[0.08em] text-muted-foreground uppercase'>
             {section.title}
           </p>
           <div className='flex flex-col gap-0.5'>
@@ -44,7 +44,7 @@ export const DocsShell = ({
                   className={`rounded-lg px-3 py-2 text-sm leading-snug transition ${
                     active
                       ? 'bg-primary font-medium text-primary-foreground shadow-sm'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100'
+                      : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
                   }`}
                 >
                   {item.title}
@@ -58,13 +58,13 @@ export const DocsShell = ({
   );
 
   return (
-    <div className='min-h-screen bg-slate-50 text-foreground dark:bg-slate-950'>
-      <header className='sticky top-0 z-30 border-b border-slate-200/80 bg-white/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/90'>
+    <div className='min-h-screen bg-background text-foreground'>
+      <header className='sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur-md'>
         <div className='flex h-14 items-center justify-between gap-3 px-4 lg:px-6'>
           <div className='flex min-w-0 items-center gap-3'>
             <button
               onClick={() => setOpen((v) => !v)}
-              className='inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 lg:hidden dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'
+              className='inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border bg-card text-muted-foreground lg:hidden'
               aria-label='Menu dokumentasi'
             >
               {open ? <X className='size-4' /> : <Menu className='size-4' />}
@@ -78,10 +78,10 @@ export const DocsShell = ({
                 <BookOpen className='size-4' />
               </span>
               <span className='min-w-0 leading-tight'>
-                <span className='block truncate text-sm font-semibold text-slate-900 dark:text-slate-100'>
+                <span className='block truncate text-sm font-semibold text-foreground'>
                   Dokumentasi
                 </span>
-                <span className='hidden truncate text-[11px] text-slate-500 sm:block dark:text-slate-400'>
+                <span className='hidden truncate text-[11px] text-muted-foreground sm:block'>
                   Codasia Web Starter
                 </span>
               </span>
@@ -92,7 +92,7 @@ export const DocsShell = ({
             <ThemeToggle />
             <Link
               href='/'
-              className='inline-flex h-9 shrink-0 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3.5 text-xs font-medium text-slate-700 transition hover:bg-white hover:text-slate-900 hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-50'
+              className='inline-flex h-9 shrink-0 items-center gap-2 rounded-lg border border-border bg-card px-3.5 text-xs font-medium text-muted-foreground transition hover:text-foreground hover:shadow-sm'
             >
               <ArrowLeft className='size-3.5' />
               <span className='hidden sm:inline'>Kembali ke aplikasi</span>
@@ -103,7 +103,7 @@ export const DocsShell = ({
 
       <div className='flex'>
         <aside
-          className={`fixed top-14 z-20 no-scrollbar h-[calc(100vh-3.5rem)] w-72 shrink-0 overflow-y-auto border-r border-slate-200/80 bg-white transition-transform lg:sticky lg:translate-x-0 dark:border-slate-800 dark:bg-slate-900 ${
+          className={`fixed top-14 z-20 no-scrollbar h-[calc(100vh-3.5rem)] w-72 shrink-0 overflow-y-auto border-r border-border bg-card transition-transform lg:sticky lg:translate-x-0 ${
             open ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
@@ -112,7 +112,7 @@ export const DocsShell = ({
 
         {open && (
           <div
-            className='fixed inset-0 top-14 z-10 bg-slate-900/20 backdrop-blur-[2px] lg:hidden'
+            className='fixed inset-0 top-14 z-10 bg-black/30 backdrop-blur-[2px] lg:hidden'
             onClick={() => setOpen(false)}
           />
         )}

@@ -40,7 +40,7 @@ const CodeBlock = ({ children }: { children?: ReactNode }) => {
     <div className='group relative my-6'>
       <pre
         ref={preRef}
-        className='no-scrollbar overflow-x-auto rounded-xl border border-slate-800 bg-slate-900 px-4 py-3.5 pr-12 text-slate-100 dark:border-slate-700/60 dark:bg-slate-950'
+        className='no-scrollbar overflow-x-auto rounded-xl border bg-muted px-4 py-3.5 pr-12 text-foreground'
       >
         {children}
       </pre>
@@ -49,7 +49,7 @@ const CodeBlock = ({ children }: { children?: ReactNode }) => {
         onClick={handleCopy}
         aria-label={copied ? 'Kode tersalin' : 'Salin kode'}
         title={copied ? 'Tersalin' : 'Salin kode'}
-        className='absolute top-2 right-2 inline-flex h-8 w-8 items-center justify-center rounded-md border border-slate-600/60 bg-slate-800/80 text-slate-300 transition hover:text-white dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-400 dark:hover:text-slate-100'
+        className='absolute top-2 right-2 inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-background text-muted-foreground transition hover:text-foreground'
       >
         {copied ? (
           <Check className='size-3.5' />
@@ -69,7 +69,7 @@ export const MarkdownRenderer = ({
   mediaBase: string;
 }) => {
   return (
-    <div className='docs-prose text-[15px] leading-7 text-slate-600 dark:text-slate-300'>
+    <div className='docs-prose text-[15px] leading-7 text-muted-foreground'>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeSlug]}
@@ -77,7 +77,7 @@ export const MarkdownRenderer = ({
           h1: ({ children, id }) => (
             <h1
               id={id}
-              className='mb-4 scroll-mt-24 text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100'
+              className='mb-4 scroll-mt-24 text-2xl font-semibold tracking-tight text-foreground'
             >
               {children}
             </h1>
@@ -85,7 +85,7 @@ export const MarkdownRenderer = ({
           h2: ({ children, id }) => (
             <h2
               id={id}
-              className='mt-10 mb-3 scroll-mt-24 border-b border-slate-100 pb-2 text-xl font-semibold tracking-tight text-slate-900 first:mt-0 dark:border-slate-800 dark:text-slate-100'
+              className='mt-10 mb-3 scroll-mt-24 border-b border-border pb-2 text-xl font-semibold tracking-tight text-foreground first:mt-0'
             >
               {children}
             </h2>
@@ -93,7 +93,7 @@ export const MarkdownRenderer = ({
           h3: ({ children, id }) => (
             <h3
               id={id}
-              className='mt-8 mb-2 scroll-mt-24 text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100'
+              className='mt-8 mb-2 scroll-mt-24 text-lg font-semibold tracking-tight text-foreground'
             >
               {children}
             </h3>
@@ -113,8 +113,8 @@ export const MarkdownRenderer = ({
             <li
               className={
                 className?.includes('task-list-item')
-                  ? 'list-none pl-0 text-slate-600 dark:text-slate-300'
-                  : 'pl-1 text-slate-600 dark:text-slate-300'
+                  ? 'list-none pl-0 text-muted-foreground'
+                  : 'pl-1 text-muted-foreground'
               }
             >
               {children}
@@ -125,26 +125,20 @@ export const MarkdownRenderer = ({
               <input
                 {...props}
                 disabled
-                className='mt-1 mr-2 size-3.5 rounded border-slate-300 accent-primary'
+                className='mt-1 mr-2 size-3.5 rounded accent-primary'
               />
             ) : (
               <input {...props} />
             ),
           strong: ({ children }) => (
-            <strong className='font-semibold text-slate-900 dark:text-slate-100'>
+            <strong className='font-semibold text-foreground'>
               {children}
             </strong>
           ),
-          em: ({ children }) => (
-            <em className='text-slate-700 italic dark:text-slate-300'>
-              {children}
-            </em>
-          ),
-          hr: () => (
-            <hr className='my-8 border-slate-200 dark:border-slate-800' />
-          ),
+          em: ({ children }) => <em className='italic'>{children}</em>,
+          hr: () => <hr className='my-8 border-border' />,
           blockquote: ({ children }) => (
-            <blockquote className='my-6 rounded-r-lg border-l-4 border-primary bg-primary/5 px-4 py-3 text-slate-700 not-italic dark:bg-primary/10 dark:text-slate-300'>
+            <blockquote className='my-6 rounded-r-lg border-l-4 border-primary bg-primary/5 px-4 py-3 text-foreground/80 not-italic dark:bg-primary/10'>
               {children}
             </blockquote>
           ),
@@ -170,7 +164,7 @@ export const MarkdownRenderer = ({
                 alt={alt ?? ''}
                 title={title}
                 loading='lazy'
-                className='my-6 rounded-xl border border-slate-200 bg-slate-50 shadow-sm dark:border-slate-800 dark:bg-slate-950'
+                className='my-6 rounded-xl border border-border bg-muted/50 shadow-sm'
               />
             );
           },
@@ -184,31 +178,31 @@ export const MarkdownRenderer = ({
               );
             }
             return (
-              <code className='rounded-md border border-slate-200 bg-slate-100 px-1.5 py-0.5 font-mono text-[13px] text-primary dark:border-slate-700 dark:bg-slate-800'>
+              <code className='rounded-md border border-border bg-muted px-1.5 py-0.5 font-mono text-[13px] text-primary'>
                 {children}
               </code>
             );
           },
           pre: ({ children }) => <CodeBlock>{children}</CodeBlock>,
           table: ({ children }) => (
-            <div className='my-6 no-scrollbar overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800'>
+            <div className='my-6 no-scrollbar overflow-x-auto rounded-xl border border-border'>
               <table className='w-full border-collapse text-sm'>
                 {children}
               </table>
             </div>
           ),
           thead: ({ children }) => (
-            <thead className='bg-slate-50 text-left text-slate-700 dark:bg-slate-800/60 dark:text-slate-300'>
+            <thead className='bg-muted/50 text-left text-foreground'>
               {children}
             </thead>
           ),
           th: ({ children }) => (
-            <th className='border-b border-slate-200 px-3.5 py-2.5 font-semibold dark:border-slate-800'>
+            <th className='border-b border-border px-3.5 py-2.5 font-semibold'>
               {children}
             </th>
           ),
           td: ({ children }) => (
-            <td className='border-b border-slate-100 px-3.5 py-2.5 text-slate-600 dark:border-slate-800 dark:text-slate-300'>
+            <td className='border-b border-border px-3.5 py-2.5 text-muted-foreground'>
               {children}
             </td>
           ),

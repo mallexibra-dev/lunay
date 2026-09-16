@@ -12,7 +12,7 @@ import {
   Sparkles,
   Zap,
 } from 'lucide-react';
-import { CopyCommand } from '@/components/copy-command';
+import { CopyCommand } from '@/components/shared/copy-command';
 import { Button } from '@/components/ui/button';
 
 const CLONE_COMMAND =

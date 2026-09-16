@@ -39,10 +39,10 @@ export const CopyPageButton = ({
       onClick={handleCopy}
       aria-label='Salin halaman sebagai markdown'
       title='Salin halaman sebagai markdown'
-      className='inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 transition hover:border-primary/40 hover:text-primary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-primary/50 dark:hover:text-primary'
+      className='inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border bg-card px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition hover:border-primary/40 hover:text-primary'
     >
       {copied ? (
-        <Check className='size-3.5 text-green-600 dark:text-green-400' />
+        <Check className='size-3.5 text-emerald-600 dark:text-emerald-400' />
       ) : (
         <Copy className='size-3.5' />
       )}
