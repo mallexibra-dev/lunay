@@ -1,7 +1,7 @@
 ---
 title: Autentikasi
 description: Generator Better Auth satu perintah dan arsitektur hasilnya.
-order: 7
+order: 3
 ---
 
 Starter kit sengaja dikirim **tanpa auth** agar tetap bersih, tetapi auth selalu satu perintah lagi lewat generator resmi Codasia. Generatornya memakai [Better Auth](https://www.better-auth.com) dengan adapter Drizzle, sehingga seluruh bagian yang dibutuhkannya (Drizzle, Zod, shadcn/ui) sudah tersedia di kit.

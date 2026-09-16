@@ -97,10 +97,6 @@ export default function HomePage() {
         </header>
 
         <section className='flex flex-1 flex-col items-center justify-center py-20 text-center'>
-          <span className='mb-6 inline-flex items-center gap-1.5 rounded-full border bg-card px-3 py-1 text-xs font-medium text-muted-foreground'>
-            <Sparkles className='size-3.5 text-primary' />
-            Starter kit internal Codasia
-          </span>
           <h1 className='max-w-3xl text-4xl font-bold tracking-tight text-balance text-foreground sm:text-6xl'>
             Bangun produk lebih cepat dengan{' '}
             <span className='bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent'>

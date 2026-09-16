@@ -1,7 +1,7 @@
 ---
 title: Komponen UI
 description: Memakai, menambah, dan menulis komponen shadcn/ui.
-order: 5
+order: 6
 ---
 
 ## Komponen yang tersedia

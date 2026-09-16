@@ -24,10 +24,10 @@ Selamat datang di **dokumentasi internal Codasia** untuk Codasia Web Starter. Do
 | -------------------------------------- | ---------------------------------------------------- |
 | [Panduan Awal](/docs/panduan-awal)     | Instalasi, struktur proyek, dan perintah CLI         |
 | [Konsep Dasar](/docs/fundamental)      | Variabel lingkungan, routing, styling, dan dark mode |
+| [Autentikasi](/docs/autentikasi)       | Generator auth Better Auth dan arsitekturnya         |
 | [Database](/docs/database)             | Koneksi Drizzle, skema, migrasi, query, dan seeding  |
 | [Data Fetching](/docs/data-fetching)   | Klien API Axios dan React Query                      |
 | [Antarmuka](/docs/antarmuka)           | Komponen shadcn/ui serta form + validasi             |
-| [Autentikasi](/docs/autentikasi)       | Generator auth Better Auth dan arsitekturnya         |
 | [Panduan Teknis](/docs/panduan-teknis) | Logging, middleware, testing, dan deployment         |
 
 Mulai dari [Instalasi](/docs/panduan-awal/installation), atau pilih modul di atas.

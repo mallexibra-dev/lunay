@@ -1,7 +1,7 @@
 ---
 title: Logging & Middleware
 description: Winston logging dan proxy middleware bawaan.
-order: 6
+order: 7
 ---
 
 ## Logger (Winston)

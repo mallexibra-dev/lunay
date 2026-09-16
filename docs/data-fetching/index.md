@@ -1,7 +1,7 @@
 ---
 title: React Query
 description: Mengambil dan menyimpan state server dengan TanStack React Query.
-order: 4
+order: 5
 ---
 
 ## Sudah terpasang global

@@ -1,7 +1,7 @@
 ---
 title: Koneksi Database
 description: Pola koneksi Drizzle ORM yang siap serverless.
-order: 3
+order: 4
 ---
 
 ## Stack
