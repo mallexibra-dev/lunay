@@ -82,7 +82,7 @@ export const DocsShell = ({
                   Dokumentasi
                 </span>
                 <span className='hidden truncate text-[11px] text-slate-500 sm:block dark:text-slate-400'>
-                  Next.js Starter Kit
+                  Codasia Web Starter
                 </span>
               </span>
             </Link>

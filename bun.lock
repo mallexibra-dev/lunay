@@ -3,7 +3,7 @@
   "configVersion": 0,
   "workspaces": {
     "": {
-      "name": "nextjs-starterkit",
+      "name": "codasia-web-starter",
       "dependencies": {
         "@hookform/resolvers": "^5.2.2",
         "@radix-ui/react-accordion": "^1.2.12",
@@ -89,6 +89,9 @@
       },
     },
   },
+  "trustedDependencies": [
+    "unrs-resolver",
+  ],
   "packages": {
     "@acemir/cssom": ["@acemir/cssom@0.9.20", "", {}, "sha512-YUSA5jW8qn/c6nZUlFsn2Nt5qFFRBcGTgL9CzbiZbJCtEFY0Nv/ycO3BHT9tLjus9++zOYWe5mLCRIesuay25g=="],
 

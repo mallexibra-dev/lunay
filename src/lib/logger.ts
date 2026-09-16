@@ -37,7 +37,7 @@ export const logger = winston.createLogger({
   level: env.NODE_ENV === 'production' ? 'info' : 'debug',
   format: logFormat,
   defaultMeta: {
-    service: 'nextjs-starterkit',
+    service: 'codasia-web-starter',
     environment: env.NODE_ENV,
   },
   transports: [

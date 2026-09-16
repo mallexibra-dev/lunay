@@ -60,7 +60,7 @@ Format outputnya JSON terstruktur (di file) sehingga mudah dicari dan diparse ol
 {
   "level": "info",
   "message": "Database Operation",
-  "service": "nextjs-starterkit",
+  "service": "codasia-web-starter",
   "environment": "production",
   "type": "database_operation",
   "operation": "select",

@@ -4,7 +4,7 @@ description: Gambaran umum starter kit, yang sudah termasuk, dan cara kerjanya.
 order: 1
 ---
 
-Next.js Starter Kit adalah basis proyek resmi Codasia yang menyatukan framework, styling, database, state management, dan testing dalam satu konfigurasi yang sudah teruji, sehingga Anda bisa langsung menulis fitur tanpa setup dari nol.
+Codasia Web Starter adalah basis proyek resmi Codasia yang menyatukan framework, styling, database, state management, dan testing dalam satu konfigurasi yang sudah teruji, sehingga Anda bisa langsung menulis fitur tanpa setup dari nol.
 
 Dokumentasi ini bersifat internal dan menjadi acuan baku bagi seluruh proyek Next.js di Codasia. Konvensi pada halaman-halaman berikut adalah best practice yang diharapkan berlaku di setiap proyek, bukan sekadar saran.
 

@@ -1,9 +1,9 @@
 ---
 title: Dokumentasi
-description: Panduan lengkap penggunaan Next.js Starter Kit.
+description: Panduan lengkap penggunaan Codasia Web Starter.
 ---
 
-Selamat datang di **dokumentasi internal Codasia** untuk Next.js Starter Kit. Dokumen ini adalah acuan baku yang dipakai di seluruh proyek Next.js Codasia: cara memasang, struktur proyek, konvensi, hingga pola pemakaian setiap lapisan. Saat memulai proyek baru, perlakukan semua yang tertulis di sini sebagai standar tim.
+Selamat datang di **dokumentasi internal Codasia** untuk Codasia Web Starter. Dokumen ini adalah acuan baku yang dipakai di seluruh proyek Next.js Codasia: cara memasang, struktur proyek, konvensi, hingga pola pemakaian setiap lapisan. Saat memulai proyek baru, perlakukan semua yang tertulis di sini sebagai standar tim.
 
 ## Apa saja isinya
 

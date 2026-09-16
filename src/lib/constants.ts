@@ -1,7 +1,7 @@
 // App constants and configuration
-export const APP_NAME = 'Next.js Starter Kit';
+export const APP_NAME = 'Codasia Web Starter';
 export const APP_DESCRIPTION =
-  'A modern Next.js application with src directory structure';
+  'Starter kit internal Codasia untuk memulai proyek Next.js 16 dengan standar tim.';
 
 export const API_ENDPOINTS = {
   // Add your API endpoints here

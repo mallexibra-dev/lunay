@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist_Mono, Poppins } from 'next/font/google';
 import { QueryClientProviderWrapper } from '@/components/layouts/query-client-provider';
 import { ThemeProvider } from '@/components/layouts/theme-provider';
 import '@/styles/globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const poppins = Poppins({
+  variable: '--font-poppins',
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
 });
 
 const geistMono = Geist_Mono({
@@ -15,8 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Next.js Starter Kit',
-  description: 'A comprehensive Next.js 16 starter kit with modern tools',
+  title: 'Codasia Web Starter',
+  description:
+    'Starter kit internal Codasia: Next.js 16, Tailwind CSS v4, shadcn/ui, Drizzle ORM, React Query, dan dokumentasi teknis lengkap di /docs.',
 };
 
 export default function RootLayout({
@@ -26,9 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${poppins.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider>
           <QueryClientProviderWrapper>{children}</QueryClientProviderWrapper>
         </ThemeProvider>
