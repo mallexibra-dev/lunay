@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Geist_Mono, Nunito } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import { QueryClientProviderWrapper } from '@/components/layouts/query-client-provider';
 import { ThemeProvider } from '@/components/layouts/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
@@ -7,17 +7,12 @@ import { ServiceWorkerRegister } from '@/components/shared/service-worker-regist
 import { CycleStoreProvider } from '@/hooks/use-cycle-store';
 import '@/styles/globals.css';
 
-// Nunito — satu-satunya font app (permintaan eksplisit).
-const nunito = Nunito({
-  variable: '--font-nunito',
+// Poppins — satu-satunya font app.
+const poppins = Poppins({
+  variable: '--font-poppins',
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
@@ -46,9 +41,9 @@ export default function RootLayout({
 }>) {
   return (
     // Variabel font dipasang di <html> agar preflight Tailwind
-    // (html { font-family }) bisa membaca var(--font-nunito).
-    <html lang='id' suppressHydrationWarning className={`${nunito.variable} ${geistMono.variable}`}>
-      {/* font-sans = var(--font-nunito) langsung di body, tak bergantung chain preflight */}
+    // (html { font-family }) bisa membaca var(--font-poppins).
+    <html lang='id' suppressHydrationWarning className={poppins.variable}>
+      {/* font-sans = var(--font-poppins) langsung di body, tak bergantung chain preflight */}
       <body className='font-sans antialiased'>
         <ThemeProvider>
           <CycleStoreProvider>

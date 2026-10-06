@@ -57,7 +57,7 @@
   --color-phase-ovulatory-soft: var(--phase-ovulatory-soft);
   --color-phase-luteal: var(--phase-luteal);
   --color-phase-luteal-soft: var(--phase-luteal-soft);
-  --font-display: var(--font-nunito), 'Nunito', ui-rounded, system-ui, sans-serif;
+  --font-display: var(--font-poppins), 'Poppins', ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ------------------------------------------------------------------ */

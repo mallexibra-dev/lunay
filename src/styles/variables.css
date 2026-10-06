@@ -51,10 +51,10 @@
 
   /* ========== TYPOGRAPHY ========== */
 
-  /* Font families — mengikuti next/font dari app/layout.tsx (Nunito) */
-  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-  --font-serif: Georgia, Cambria, 'Times New Roman', Times, serif;
+  /* Font families — mengikuti next/font dari app/layout.tsx (Poppins) */
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 
   /* Font sizes */
   --text-xs: 0.75rem; /* 12px */
