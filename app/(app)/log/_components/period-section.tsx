@@ -64,7 +64,7 @@ export const PeriodSection = ({ ctx }: { ctx: CycleContext }) => {
 
       {/* Haid berjalan */}
       {active && (
-        <div className='rounded-2xl border-2border-phase-menstrual/30 bg-card p-4'>
+        <div className='rounded-2xl border-2 border-phase-menstrual/30 bg-card p-4'>
           <div className='mb-1 flex items-center justify-between gap-2'>
             <p className='text-sm font-semibold text-foreground'>
               Haid berjalan · mulai {formatShort(active.start)}

@@ -20,7 +20,7 @@ const StatTile = ({
   unit?: string;
   hint?: string;
 }) => (
-  <div className='rounded-2xl border-2border-border bg-card p-3.5'>
+  <div className='rounded-2xl border-2 border-border bg-card p-3.5'>
     <p className='text-[11px] font-medium text-muted-foreground'>{label}</p>
     <p className='app-figure mt-1 text-[1.65rem] leading-none font-semibold text-foreground'>
       {value}
@@ -83,7 +83,7 @@ export default function InsightsPage() {
       </section>
 
       {/* Grafik panjang siklus */}
-      <section className='rounded-2xl border-2border-border bg-card p-4'>
+      <section className='rounded-2xl border-2 border-border bg-card p-4'>
         <h2 className='text-[13px] font-semibold text-foreground'>
           Panjang siklus
         </h2>
@@ -94,7 +94,7 @@ export default function InsightsPage() {
       </section>
 
       {/* Grafik durasi haid */}
-      <section className='rounded-2xl border-2border-border bg-card p-4'>
+      <section className='rounded-2xl border-2 border-border bg-card p-4'>
         <h2 className='text-[13px] font-semibold text-foreground'>
           Durasi haid
         </h2>
@@ -110,7 +110,7 @@ export default function InsightsPage() {
           Pola yang terdeteksi
         </h2>
         {insights.length === 0 ? (
-          <div className='rounded-2xl border-2border-dashed border-border bg-card/60 p-5 text-center'>
+          <div className='rounded-2xl border-2 border-dashed border-border bg-card/60 p-5 text-center'>
             <Info className='mx-auto mb-2 size-5 text-muted-foreground' />
             <p className='text-[13px] text-muted-foreground'>
               Pola muncul setelah beberapa siklus dan catatan harian
@@ -123,7 +123,7 @@ export default function InsightsPage() {
               <div
                 key={insight.id}
                 className={cn(
-                  'rounded-2xl border-2p-3.5',
+                  'rounded-2xl border-2 p-3.5',
                   insight.tone === 'positive' &&
                     'border-phase-ovulatory/30 bg-phase-ovulatory-soft/50',
                   insight.tone === 'attention' && 'border-amber-500/40 bg-amber-500/10',
