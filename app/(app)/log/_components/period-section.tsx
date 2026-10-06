@@ -37,7 +37,7 @@ export const PeriodSection = ({ ctx }: { ctx: CycleContext }) => {
     <div className='flex flex-col gap-4'>
       {/* Mulai haid */}
       {!active && (
-        <div className='rounded-2xl border-2border-border bg-card p-4'>
+        <div className='rounded-2xl border-2 border-border bg-card p-4'>
           <p className='text-sm font-semibold text-foreground'>Catat haid baru</p>
           <p className='mt-0.5 text-[13px] text-muted-foreground'>
             Pilih hari pertama haid, lalu tambahkan intensitas aliran tiap hari.
@@ -122,7 +122,7 @@ export const PeriodSection = ({ ctx }: { ctx: CycleContext }) => {
           <h3 className='mb-2 text-[13px] font-semibold text-foreground'>
             Riwayat haid
           </h3>
-          <div className='divide-y divide-border overflow-hidden rounded-2xl border-2border-border bg-card'>
+          <div className='divide-y divide-border overflow-hidden rounded-2xl border-2 border-border bg-card'>
             {sortedPeriods.map((period) => {
               const days = Object.keys(period.flows);
               return (

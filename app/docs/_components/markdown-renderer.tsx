@@ -40,7 +40,7 @@ const CodeBlock = ({ children }: { children?: ReactNode }) => {
     <div className='group relative my-6'>
       <pre
         ref={preRef}
-        className='no-scrollbar overflow-x-auto rounded-xl border-2bg-muted px-4 py-3.5 pr-12 text-foreground'
+        className='no-scrollbar overflow-x-auto rounded-xl border-2 bg-muted px-4 py-3.5 pr-12 text-foreground'
       >
         {children}
       </pre>
@@ -164,7 +164,7 @@ export const MarkdownRenderer = ({
                 alt={alt ?? ''}
                 title={title}
                 loading='lazy'
-                className='my-6 rounded-xl border-2border-border bg-muted/50 shadow-sm'
+                className='my-6 rounded-xl border-2 border-border bg-muted/50 shadow-sm'
               />
             );
           },
@@ -185,7 +185,7 @@ export const MarkdownRenderer = ({
           },
           pre: ({ children }) => <CodeBlock>{children}</CodeBlock>,
           table: ({ children }) => (
-            <div className='my-6 no-scrollbar overflow-x-auto rounded-xl border-2border-border'>
+            <div className='my-6 no-scrollbar overflow-x-auto rounded-xl border-2 border-border'>
               <table className='w-full border-collapse text-sm'>
                 {children}
               </table>

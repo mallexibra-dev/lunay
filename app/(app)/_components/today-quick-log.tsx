@@ -71,7 +71,7 @@ export const PeriodQuickCard = ({ ctx }: { ctx: CycleContext }) => {
 
   if (!active) {
     return (
-      <div className='rounded-2xl border-2border-border bg-card p-4'>
+      <div className='rounded-2xl border-2 border-border bg-card p-4'>
         <p className='text-sm font-semibold text-foreground'>Mulai haid?</p>
         <p className='mt-0.5 mb-3 text-[13px] text-muted-foreground'>
           Kalau haidmu dimulai di hari lain, gunakan tab Catat.
@@ -91,7 +91,7 @@ export const PeriodQuickCard = ({ ctx }: { ctx: CycleContext }) => {
   const periodDay = diffDaysISO(active.start, today) + 1;
 
   return (
-    <div className='rounded-2xl border-2border-phase-menstrual/30 bg-phase-menstrual-soft/60 p-4'>
+    <div className='rounded-2xl border-2 border-phase-menstrual/30 bg-phase-menstrual-soft/60 p-4'>
       <div className='mb-3 flex items-center justify-between gap-2'>
         <div>
           <p className='text-sm font-semibold text-foreground'>
@@ -148,7 +148,7 @@ export const QuickLinks = () => {
         <Link
           key={item.label}
           href={item.href}
-          className='group rounded-2xl border-2border-border bg-card p-3.5 transition-colors hover:border-primary/40'
+          className='group rounded-2xl border-2 border-border bg-card p-3.5 transition-colors hover:border-primary/40'
         >
           <span className='grid size-9 place-items-center rounded-xl bg-secondary text-secondary-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary'>
             <item.icon className='size-4.5' />

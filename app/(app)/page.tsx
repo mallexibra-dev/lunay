@@ -62,7 +62,7 @@ export default function TodayPage() {
             cycleLength={ctx.cycleLengthEstimate}
             phase={phase}
           />
-          <div className='w-full rounded-2xl border-2border-border bg-card p-4'>
+          <div className='w-full rounded-2xl border-2 border-border bg-card p-4'>
             <div className='flex items-center gap-2'>
               <span
                 className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${phaseChipClass(phase)}`}
@@ -79,7 +79,7 @@ export default function TodayPage() {
           </div>
         </section>
       ) : (
-        <section className='rounded-2xl border-2border-dashed border-border bg-card/60 p-6 text-center'>
+        <section className='rounded-2xl border-2 border-dashed border-border bg-card/60 p-6 text-center'>
           <p className='font-display text-lg font-semibold text-foreground'>
             Selamat datang di Lunay
           </p>
@@ -118,7 +118,7 @@ export default function TodayPage() {
           <h2 className='mb-2.5 text-[13px] font-semibold text-foreground'>
             Pengingat aktif
           </h2>
-          <div className='divide-y divide-border overflow-hidden rounded-2xl border-2border-border bg-card'>
+          <div className='divide-y divide-border overflow-hidden rounded-2xl border-2 border-border bg-card'>
             {activeReminders.slice(0, 3).map((reminder) => (
               <Link
                 key={reminder.id}

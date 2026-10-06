@@ -71,7 +71,7 @@ export default async function DocsPage({
         </div>
       </div>
 
-      <div className='overflow-hidden rounded-2xl border-2border-border bg-card shadow-sm'>
+      <div className='overflow-hidden rounded-2xl border-2 border-border bg-card shadow-sm'>
         <div className='h-1 bg-primary' />
         <div className='p-6 lg:p-9'>
           <MarkdownRenderer content={page.content} mediaBase={page.mediaBase} />
@@ -91,7 +91,7 @@ export default async function DocsPage({
                 <Link
                   key={section.slug}
                   href={`/docs/${first.slug.join('/')}`}
-                  className='group rounded-xl border-2border-border bg-card p-4 shadow-sm transition hover:border-primary/30 hover:shadow-md'
+                  className='group rounded-xl border-2 border-border bg-card p-4 shadow-sm transition hover:border-primary/30 hover:shadow-md'
                 >
                   <span className='mb-3 grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary'>
                     <BookMarked className='size-4' />
@@ -114,7 +114,7 @@ export default async function DocsPage({
           {page.prev ? (
             <Link
               href={page.prev.href}
-              className='group rounded-xl border-2border-border bg-card p-4 shadow-sm transition hover:border-primary/30 hover:shadow-md'
+              className='group rounded-xl border-2 border-border bg-card p-4 shadow-sm transition hover:border-primary/30 hover:shadow-md'
             >
               <p className='flex items-center gap-1 text-[11px] font-medium tracking-wide text-muted-foreground uppercase'>
                 <ArrowLeft className='size-3' /> Sebelumnya
@@ -129,7 +129,7 @@ export default async function DocsPage({
           {page.next && (
             <Link
               href={page.next.href}
-              className={`group rounded-xl border-2border-border bg-card p-4 shadow-sm transition hover:border-primary/30 hover:shadow-md ${
+              className={`group rounded-xl border-2 border-border bg-card p-4 shadow-sm transition hover:border-primary/30 hover:shadow-md ${
                 page.prev ? 'sm:text-right' : ''
               }`}
             >

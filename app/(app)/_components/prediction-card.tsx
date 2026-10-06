@@ -11,7 +11,7 @@ export const PredictionCard = ({ ctx }: { ctx: CycleContext }) => {
 
   if (!nextPeriodStart || daysUntilNextPeriod === null) {
     return (
-      <div className='rounded-2xl border-2border-dashed border-border bg-card/60 p-4 text-sm text-muted-foreground'>
+      <div className='rounded-2xl border-2 border-dashed border-border bg-card/60 p-4 text-sm text-muted-foreground'>
         Catat haid pertamamu di tab <span className='font-medium'>Catat</span>{' '}
         agar Lunay bisa mulai memprediksi siklusmu.
       </div>
@@ -23,7 +23,7 @@ export const PredictionCard = ({ ctx }: { ctx: CycleContext }) => {
   return (
     <div
       className={cn(
-        'rounded-2xl border-2p-4',
+        'rounded-2xl border-2 p-4',
         overdue
           ? 'border-amber-500/40 bg-amber-500/10'
           : 'border-border bg-card'
