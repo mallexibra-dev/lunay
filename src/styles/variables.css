@@ -51,13 +51,9 @@
 
   /* ========== TYPOGRAPHY ========== */
 
-  /* Font families */
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-    Arial, sans-serif;
-  --font-mono:
-    'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New',
-    monospace;
+  /* Font families — mengikuti next/font dari app/layout.tsx (Nunito) */
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --font-serif: Georgia, Cambria, 'Times New Roman', Times, serif;
 
   /* Font sizes */

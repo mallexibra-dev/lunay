@@ -1,13 +1,17 @@
-import type { Metadata } from 'next';
-import { Geist_Mono, Poppins } from 'next/font/google';
+import type { Metadata, Viewport } from 'next';
+import { Geist_Mono, Nunito } from 'next/font/google';
 import { QueryClientProviderWrapper } from '@/components/layouts/query-client-provider';
 import { ThemeProvider } from '@/components/layouts/theme-provider';
+import { Toaster } from '@/components/ui/sonner';
+import { ServiceWorkerRegister } from '@/components/shared/service-worker-register';
+import { CycleStoreProvider } from '@/hooks/use-cycle-store';
 import '@/styles/globals.css';
 
-const poppins = Poppins({
-  variable: '--font-poppins',
+// Nunito — satu-satunya font app (permintaan eksplisit).
+const nunito = Nunito({
+  variable: '--font-nunito',
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
 });
 
@@ -17,9 +21,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Codasia Web Starter',
+  title: 'Lunay — Pelacak Siklus & Kesehatan Wanita',
   description:
-    'Starter kit internal Codasia: Next.js 16, Tailwind CSS v4, shadcn/ui, Drizzle ORM, React Query, dan dokumentasi teknis lengkap di /docs.',
+    'Catat haid, gejala, dan sinyal tubuhmu; lihat prediksi siklus dan wawasan kesehatan. Data tersimpan privat di perangkatmu.',
+  applicationName: 'Lunay',
+  appleWebApp: {
+    capable: true,
+    title: 'Lunay',
+    statusBarStyle: 'default',
+  },
+};
+
+// Lunay selalu terang (tanpa dark mode).
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#fefafc',
 };
 
 export default function RootLayout({
@@ -28,10 +45,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning>
-      <body className={`${poppins.variable} ${geistMono.variable} antialiased`}>
+    // Variabel font dipasang di <html> agar preflight Tailwind
+    // (html { font-family }) bisa membaca var(--font-nunito).
+    <html lang='id' suppressHydrationWarning className={`${nunito.variable} ${geistMono.variable}`}>
+      {/* font-sans = var(--font-nunito) langsung di body, tak bergantung chain preflight */}
+      <body className='font-sans antialiased'>
         <ThemeProvider>
-          <QueryClientProviderWrapper>{children}</QueryClientProviderWrapper>
+          <CycleStoreProvider>
+            {children}
+            <Toaster position='top-center' />
+            <ServiceWorkerRegister />
+          </CycleStoreProvider>
         </ThemeProvider>
       </body>
     </html>

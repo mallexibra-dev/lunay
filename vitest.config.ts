@@ -25,8 +25,12 @@ export default defineConfig({
     },
   },
   resolve: {
-    alias: {
-      '@': resolve(__dirname, './src'),
-    },
+    alias: [
+      // schemas/ & types/ hidup di root project (konvensi AGENTS.md),
+      // sisanya di bawah src/.
+      { find: /^@\/schemas\/(.*)/, replacement: resolve(__dirname, './schemas/$1') },
+      { find: /^@\/types\/(.*)/, replacement: resolve(__dirname, './types/$1') },
+      { find: /^@\/(.*)/, replacement: resolve(__dirname, './src/$1') },
+    ],
   },
 });

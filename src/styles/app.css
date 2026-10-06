@@ -1,0 +1,129 @@
+/*
+  Tema Lunay — token ter-scope di bawah .app-theme agar /docs tetap
+  memakai tema netral starter. Palet: putih pink, SELALU TERANG (tanpa
+  dark mode — permintaan eksplisit). Warna fase: rose (haid), aprikot
+  (folikuler), jade (ovulasi), mauve (luteal).
+*/
+
+.app-theme {
+  --background: oklch(0.988 0.006 340);
+  --foreground: oklch(0.27 0.035 345);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.27 0.035 345);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.27 0.035 345);
+  --primary: oklch(0.6 0.175 352);
+  --primary-foreground: oklch(0.99 0.006 340);
+  --secondary: oklch(0.945 0.03 345);
+  --secondary-foreground: oklch(0.35 0.06 350);
+  --muted: oklch(0.965 0.014 345);
+  --muted-foreground: oklch(0.5 0.035 345);
+  --accent: oklch(0.935 0.045 350);
+  --accent-foreground: oklch(0.38 0.08 350);
+  --destructive: oklch(0.55 0.2 27);
+  /* Border sengaja terlihat: kartu memakai 2px, jadi warnanya dibuat
+     cukup pekat agar outline terbaca tegas (bukan border pudar). */
+  --border: oklch(0.89 0.03 345);
+  --input: oklch(0.875 0.032 345);
+  --ring: oklch(0.6 0.175 352);
+  --chart-1: oklch(0.6 0.175 352);
+  --chart-2: oklch(0.58 0.085 175);
+  --chart-3: oklch(0.66 0.115 60);
+  --chart-4: oklch(0.6 0.075 315);
+  --chart-5: oklch(0.75 0.09 85);
+  /* Warna mark chart tervalidasi (kontras & CVD-safe vs surface) */
+  --chart-accent: oklch(0.62 0.165 350);
+
+  /* Warna fase siklus */
+  --phase-menstrual: oklch(0.55 0.17 18);
+  --phase-menstrual-soft: oklch(0.93 0.033 18);
+  --phase-follicular: oklch(0.66 0.115 60);
+  --phase-follicular-soft: oklch(0.945 0.035 70);
+  --phase-ovulatory: oklch(0.58 0.085 175);
+  --phase-ovulatory-soft: oklch(0.94 0.028 175);
+  --phase-luteal: oklch(0.6 0.075 315);
+  --phase-luteal-soft: oklch(0.94 0.022 315);
+}
+
+/* Tema selalu terang — tidak ada varian .dark untuk .app-theme. */
+
+@theme inline {
+  --color-chart-accent: var(--chart-accent);
+  --color-phase-menstrual: var(--phase-menstrual);
+  --color-phase-menstrual-soft: var(--phase-menstrual-soft);
+  --color-phase-follicular: var(--phase-follicular);
+  --color-phase-follicular-soft: var(--phase-follicular-soft);
+  --color-phase-ovulatory: var(--phase-ovulatory);
+  --color-phase-ovulatory-soft: var(--phase-ovulatory-soft);
+  --color-phase-luteal: var(--phase-luteal);
+  --color-phase-luteal-soft: var(--phase-luteal-soft);
+  --font-display: var(--font-nunito), 'Nunito', ui-rounded, system-ui, sans-serif;
+}
+
+/* ------------------------------------------------------------------ */
+/* Utilitas kecil khusus app                                           */
+/* ------------------------------------------------------------------ */
+
+/* Tab bar mobile dengan safe-area iPhone */
+.app-tabbar {
+  padding-bottom: max(env(safe-area-inset-bottom), 0.5rem);
+}
+
+/* Angka besar (display) dengan numerik rapi */
+.app-figure {
+  font-family: var(--font-display);
+  font-variant-numeric: lining-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Getar halus saat PIN salah */
+@keyframes app-shake {
+  10%,
+  90% {
+    transform: translateX(-1px);
+  }
+  20%,
+  80% {
+    transform: translateX(2px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-4px);
+  }
+  40%,
+  60% {
+    transform: translateX(4px);
+  }
+}
+.app-shake {
+  animation: app-shake 0.4s both;
+}
+
+/* Laporan siap cetak: sembunyikan chrome, paksa tema terang */
+@media print {
+  .app-no-print {
+    display: none !important;
+  }
+  .app-theme {
+    --background: white;
+    --foreground: black;
+    --card: white;
+    --card-foreground: black;
+    --muted: #f5f5f4;
+    --muted-foreground: #57534e;
+    --border: #d6d3d1;
+    --primary: #9f1239;
+  }
+  body {
+    background: white !important;
+  }
+  .app-shell-main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+  .app-report-page {
+    max-width: none;
+    padding: 0;
+  }
+}
